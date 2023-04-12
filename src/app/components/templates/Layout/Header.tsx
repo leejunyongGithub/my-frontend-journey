@@ -1,7 +1,6 @@
 import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import Button from "../../atoms/button/Button";
 import { SlFire, SlArrowRight, SlArrowLeft } from "react-icons/sl";
 
 function Header() {
