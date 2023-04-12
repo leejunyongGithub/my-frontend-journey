@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { useDropdownContext } from "./dropdown";
+import { useDropdownContext } from "./Dropdown";
 
 interface Props {
   children?: ReactNode;
