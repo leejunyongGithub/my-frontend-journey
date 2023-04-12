@@ -1,4 +1,3 @@
-import { type } from "os";
 import { createContext, useContext } from "react";
 import styled from "styled-components";
 

@@ -1,8 +1,7 @@
 import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import LabelInput from "../atoms/Input/LabelInput";
-import Button from "../atoms/Button/Button";
+import Button from "../../atoms/button/Button";
 import { SlMenu, SlArrowRight, SlArrowLeft } from "react-icons/sl";
 
 function Header() {
