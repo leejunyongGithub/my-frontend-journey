@@ -1,18 +1,23 @@
-import { useState } from "react";
 import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { FcHome, FcDocument } from "react-icons/fc";
 
 function MenuBar() {
   const [option, setOption] = useRecoilState(recoilStateOption);
-  const { expanded, menu: selected } = option;
+  const { expanded, menu: selected, subExpanded } = option;
 
   const handleChangeSide = (menu: string) => {
     if (menu === selected) return;
+
+    let payload = {};
+    if (menu === "post") payload = { subExpanded: true };
+    if (menu !== "post" && subExpanded) payload = { subExpanded: false };
+
     setOption({
       ...option,
       menu: menu,
+      ...payload,
     });
   };
 

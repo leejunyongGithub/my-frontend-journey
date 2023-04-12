@@ -2,22 +2,33 @@ import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Button from "../../atoms/button/Button";
-import { SlMenu, SlArrowRight, SlArrowLeft } from "react-icons/sl";
+import { SlFire, SlArrowRight, SlArrowLeft } from "react-icons/sl";
 
 function Header() {
   const [option, setOption] = useRecoilState(recoilStateOption);
+  const { expanded, menu, subExpanded } = option;
+
   const handleChangeMenuBar = () => {
     setOption({
       ...option,
       expanded: !option.expanded,
     });
   };
-  const { expanded } = option;
+
+  const handleChangeSubBar = () => {
+    setOption({
+      ...option,
+      subExpanded: !option.subExpanded,
+    });
+  };
 
   return (
     <StyledHeader>
       <HeaderButton onClick={handleChangeMenuBar}>
         {expanded ? <SlArrowLeft size={20} /> : <SlArrowRight size={20} />}
+      </HeaderButton>
+      <HeaderButton onClick={handleChangeSubBar}>
+        {menu === "post" && <>{subExpanded ? <SlFire size={25} /> : <SlFire size={25} color="red" />}</>}
       </HeaderButton>
     </StyledHeader>
   );

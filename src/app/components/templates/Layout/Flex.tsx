@@ -16,7 +16,7 @@ export default Flex;
 const StyledFlex = styled.div<{
   mode: string;
 }>`
-width: 100%;
   display: flex;
+  flex: 1;
   flex-direction: ${(props) => (props.mode ? props.mode : "row")};
 `;
