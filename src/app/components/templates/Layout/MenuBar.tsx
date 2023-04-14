@@ -25,6 +25,8 @@ function MenuBar() {
     });
   };
 
+  const { mode } = option;
+
   return (
     <StyledMenuBar expanded={expanded}>
       <BarHeader
@@ -73,11 +75,11 @@ function MenuBar() {
           </BarListItem>
         </a>
       </div>
-      <Tooltip variant="info" anchorId="home" place="right" content="홈" />
-      <Tooltip variant="info" anchorId="main" place="right" content="저는 고양이를 좋아하는 개발자입니다." />
-      <Tooltip variant="info" anchorId="content" place="right" content="고양이와 함께 작성한 글" />
-      <Tooltip variant="info" anchorId="github" place="right" content="Github" />
-      <Tooltip variant="info" anchorId="instagram" place="right" content="키위와 포도의 일상" />
+      <StyledTooltip variant="info" anchorId="home" place="right" content="홈" />
+      <StyledTooltip variant="info" anchorId="main" place="right" content="저는 고양이를 좋아하는 개발자입니다." />
+      <StyledTooltip variant="info" anchorId="content" place="right" content="고양이와 함께 작성한 글" />
+      <StyledTooltip variant="info" anchorId="github" place="right" content="Github" />
+      <StyledTooltip variant="info" anchorId="instagram" place="right" content="키위와 포도의 일상" />
     </StyledMenuBar>
   );
 }
@@ -167,4 +169,8 @@ const BarListItem = styled.div`
     width: 4px;
     background-color: #5882fa;
   }
+`;
+
+const StyledTooltip = styled(Tooltip)`
+  z-index: 999;
 `;

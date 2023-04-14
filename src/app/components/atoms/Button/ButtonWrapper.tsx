@@ -22,7 +22,7 @@ function Button({ ...props }) {
   const { id, onClick, variant = "default", icon } = useButtonContext();
 
   return (
-    <StyledButton id={id} onClick={onClick} variant={variant}>
+    <StyledButton id={id} onClick={onClick} variant={variant} {...props}>
       {children}
     </StyledButton>
   );
