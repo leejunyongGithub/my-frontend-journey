@@ -25,7 +25,7 @@ function MenuBar() {
     });
   };
 
-  const { mode } = option;
+  //const { mode } = option;
 
   return (
     <StyledMenuBar expanded={expanded}>
@@ -86,20 +86,20 @@ function MenuBar() {
 
 export default MenuBar;
 
-const StyledMenuBar = styled.div<{
+const StyledMenuBar = styled.aside<{
   expanded: boolean;
 }>`
   position: relative;
-  width: ${(props) => (props.expanded ? "100px" : "0px")};
+  width: ${(props) => (props.expanded ? "85px" : "0px")};
   height: 100%;
   min-height: 100vh;
   display: inline-flex;
   flex-direction: column;
   background: #fbfbfa;
-  transition: all 0.5s;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.024) -1px 0px 0px 0px inset;
   overflow: ${(props) => (props.expanded ? "" : "hidden")};
+  transition: width 0.5s;
 `;
 
 const BarHeader = styled.div<{
@@ -130,8 +130,8 @@ const BarHeader = styled.div<{
 `;
 
 const HeaderLogo = styled.div`
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 0.3rem;
   background-image: url("/logo.png");
   background-repeat: no-repeat;

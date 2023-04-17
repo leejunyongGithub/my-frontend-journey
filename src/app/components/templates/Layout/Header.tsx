@@ -53,7 +53,7 @@ function Header() {
 
 export default Header;
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.header`
   width: 100%;
   height: 50px;
   background: #ededed;

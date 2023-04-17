@@ -1,39 +1,21 @@
-import React, { ReactNode, createContext, useContext, useEffect, useState, useRef } from "react";
-import Trigger from "./Trigger";
-import Menu from "./Menu";
-import Item from "./Item";
+import React, { ReactNode, createContext, useContext, useState } from "react";
+import styled from "styled-components";
 
 interface DropdownContextValue {
   isOpen: boolean;
-  selected?: string | undefined;
+  value?: string | undefined;
   handleOpen: () => void;
   handleClose: () => void;
-  handleSelect: (item: string) => void;
-}
-
-interface Props {
-  value: string;
-  onChange: React.Dispatch<React.SetStateAction<string>>;
-  children?: ReactNode;
+  onChange: (item: string) => void;
 }
 
 const DropdownContext = createContext<DropdownContextValue | null>(null);
 
-export function Dropdown({ value, children, onChange }: Props) {
+function DropdownWrapper({ value, onChange, children }: any) {
   // Dropdown 에서 하는 역활
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<string>(value);
 
   // Context를 생성 해주는건 하위 컴포넌트들에게 기능을 부여함 props 드릴링으로 가능하지만 가독성이 떨어짐..
-
-  const renderRef = useRef<boolean>(true);
-
-  useEffect(() => {
-    if (!renderRef.current) {
-      onChange(selected);
-    }
-    renderRef.current = false;
-  }, [selected]);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -43,26 +25,72 @@ export function Dropdown({ value, children, onChange }: Props) {
     setIsOpen(false);
   };
 
-  const handleSelect = (item: string) => {
-    handleClose();
-    setSelected(item);
-  };
-
   return (
-    <DropdownContext.Provider value={{ isOpen, selected, handleOpen, handleClose, handleSelect }}>
+    <DropdownContext.Provider value={{ isOpen, value, handleOpen, handleClose, onChange }}>
       {children}
     </DropdownContext.Provider>
   );
 }
 
-Dropdown.Trigger = Trigger;
-Dropdown.Menu = Menu;
-Dropdown.Item = Item;
+function Trigger(props: any) {
+  const { trigger } = props;
+  const { isOpen, handleClose, handleOpen } = useDropdownContext();
+  return (
+    <StyledTrigger onClick={!isOpen ? handleOpen : handleClose} {...props}>
+      {trigger}
+    </StyledTrigger>
+  );
+}
 
-export const useDropdownContext = () => {
+function Item(props: any) {
+  const { children, value: selected } = props;
+  const { onChange } = useDropdownContext();
+
+  return (
+    <StyledItem {...props} onClick={() => onChange(selected)}>
+      {children}
+    </StyledItem>
+  );
+}
+
+function Menu({ children, className }: any) {
+  const { isOpen } = useDropdownContext();
+  return (
+    <StyledList isOpen={isOpen} className={className}>
+      {children}
+    </StyledList>
+  );
+}
+
+DropdownWrapper.Trigger = Trigger;
+DropdownWrapper.Menu = Menu;
+DropdownWrapper.Item = Item;
+
+export default DropdownWrapper;
+
+const useDropdownContext = () => {
   const context = useContext(DropdownContext);
   if (context === null) {
     throw new Error("useDropdownContext must be used within a DropdownProvider");
   }
   return context;
 };
+
+const StyledTrigger = styled.div`
+  width: 200px;
+  min-height: 30px;
+  user-select: none;
+`;
+
+const StyledItem = styled.div<{
+  isSelect?: boolean;
+}>`
+  user-select: none;
+  cursor: pointer;
+`;
+
+const StyledList = styled.div<{
+  isOpen: boolean;
+}>`
+  height: ${(props) => (props.isOpen ? "200px" : "0px")};
+`;

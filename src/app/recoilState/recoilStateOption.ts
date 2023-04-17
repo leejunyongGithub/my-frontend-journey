@@ -7,6 +7,7 @@ interface Option {
   title: string;
   subTitle: string;
   menu: string;
+  category: Array<string>;
 }
 
 export const recoilStateOption = atom<Option>({
@@ -18,5 +19,6 @@ export const recoilStateOption = atom<Option>({
     title: "title",
     subTitle: "title",
     menu: "logo",
+    category: [],
   },
 });
