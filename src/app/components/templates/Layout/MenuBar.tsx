@@ -142,7 +142,7 @@ const HeaderLogo = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 0.3rem;
-  background-image: url("/logo.png");
+  background-image: url("/logo.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #ceecf5;
