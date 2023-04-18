@@ -2,9 +2,8 @@ import "react-tooltip/dist/react-tooltip.css";
 import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled, { css } from "styled-components";
-import { FcHome, FcDocument } from "react-icons/fc";
 import { VscGithubAlt } from "react-icons/vsc";
-import { SlSocialInstagram } from "react-icons/sl";
+import { SlSocialInstagram,SlHome,SlGrid } from "react-icons/sl";
 import { Tooltip } from "react-tooltip";
 
 function MenuBar() {
@@ -42,14 +41,14 @@ function MenuBar() {
           className={selected === "home" ? "selected-item" : ""}
           onClick={() => handleChangeSide("home")}
         >
-          <FcHome size={50} />
+          <SlHome size={30} />
         </BarListItem>
         <BarListItem
           id="content"
           className={selected === "post" ? "selected-item" : ""}
           onClick={() => handleChangeSide("post")}
         >
-          <FcDocument size={50} />
+          <SlGrid size={30} />
         </BarListItem>
       </BarList>
 
@@ -187,4 +186,7 @@ const BarListItem = styled.div`
 
 const StyledTooltip = styled(Tooltip)`
   z-index: 999;
+  ${({ theme }) => css`
+  background: ${theme.colors.tooltip} !important;
+`};
 `;

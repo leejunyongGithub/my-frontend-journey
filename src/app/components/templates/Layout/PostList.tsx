@@ -3,7 +3,7 @@ import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
 import { useRecoilValue } from "recoil";
 import MenuSelectList from "../../molecules/MenuSelectList/MenuSelectList";
 import MenuButton from "../../molecules/MenuButton/MenuButton";
-import { FcFolder, FcOpenedFolder } from "react-icons/fc";
+import { SlFolder } from "react-icons/sl";
 
 const CATEGORY = ["프론트엔드", "React", "잡담", "키위와포도"];
 const OPTIONS = ["테스트글1", "테스트글2", "테스트글3", "테스트글4"];
@@ -20,7 +20,7 @@ function PostList() {
             className="no-scrollbar"
             key={item}
             trigger={
-              <MenuButton icon={category === item ? <FcOpenedFolder /> : <FcFolder />}>
+              <MenuButton icon={<SlFolder />}>
                 <span>{item}</span>
               </MenuButton>
             }

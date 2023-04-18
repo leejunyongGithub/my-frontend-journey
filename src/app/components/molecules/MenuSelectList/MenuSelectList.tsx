@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css} from "styled-components";
 import DropdownWrapper from "../../atoms/Dropdown/Dropdown";
 import { useState } from "react";
-import { FcDocument } from "react-icons/fc";
+import { SlDoc } from "react-icons/sl";
 
 function MenuSelectList({ trigger, options }: any) {
   const [selected, change] = useState("");
@@ -17,7 +17,7 @@ function MenuSelectList({ trigger, options }: any) {
         <StyledMenu>
           {options.map((option: any, index: string | number) => (
             <StyledItem key={index} value={option}>
-              <FcDocument />
+              <SlDoc />
               <span>{option}</span>
             </StyledItem>
           ))}
@@ -54,9 +54,13 @@ const StyledItem = styled(DropdownWrapper.Item)`
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
+  padding-left: 4px;
   gap: 4px;
   &: hover {
-    background: #95c3f5;
-    color: #fff;
+    ${({ theme }) => css`
+    background: ${theme.colors.contentHover};
+    color: ${theme.colors.color};
+  `};
   }
+  box-sizing: border-box;
 `;

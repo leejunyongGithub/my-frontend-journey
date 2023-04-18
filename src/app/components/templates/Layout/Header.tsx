@@ -1,7 +1,7 @@
 import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled, { css } from "styled-components";
-import { SlFire, SlArrowRight, SlArrowLeft } from "react-icons/sl";
+import { SlMouse, SlArrowRight, SlArrowLeft } from "react-icons/sl";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import ToggleButton from "../../molecules/ToggleButton/ToggleButton";
 import { useState } from "react";
@@ -40,7 +40,7 @@ function Header() {
         {expanded ? <SlArrowLeft size={20} /> : <SlArrowRight size={20} />}
       </HeaderButton>
       <HeaderButton onClick={handleChangeSubBar}>
-        {menu === "post" && <>{subExpanded ? <SlFire size={25} /> : <SlFire size={25} color="red" />}</>}
+        {menu === "post" && <>{subExpanded ? <SlMouse size={25} /> : <SlMouse size={25} color="red" />}</>}
       </HeaderButton>
       <HeaderToggleButton>
         <HiOutlineSun size={20} />

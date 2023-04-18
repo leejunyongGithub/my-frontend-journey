@@ -16,6 +16,8 @@ const light = {
     hover: "#ededed",
     scroll: "#58acfa",
     content: "#fff",
+    tooltip: "",
+    contentHover: "#95c3f5"
   },
 };
 
@@ -28,6 +30,8 @@ const dark = {
     hover: "#5d5959",
     scroll: "#ca1560",
     content: "#4a4a4a",
+    tooltip: "#e52b88",
+    contentHover: "#353332"
   },
 };
 
