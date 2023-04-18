@@ -1,7 +1,7 @@
 import "react-tooltip/dist/react-tooltip.css";
 import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { FcHome, FcDocument } from "react-icons/fc";
 import { VscGithubAlt } from "react-icons/vsc";
 import { SlSocialInstagram } from "react-icons/sl";
@@ -100,6 +100,12 @@ const StyledMenuBar = styled.aside<{
   box-shadow: rgba(0, 0, 0, 0.024) -1px 0px 0px 0px inset;
   overflow: ${(props) => (props.expanded ? "" : "hidden")};
   transition: width 0.5s;
+  ${({ theme }) => css`
+    background: ${theme.colors.background};
+    color: ${theme.colors.color};
+  `};
+
+  transition: all 0.3s ease-in-out;
 `;
 
 const BarHeader = styled.div<{
@@ -115,7 +121,9 @@ const BarHeader = styled.div<{
   position: relative;
 
   &: hover {
-    background: #ededed;
+    ${({ theme }) => css`
+      background: ${theme.colors.hover};
+    `};
   }
 
   &.selected-item::before {
@@ -125,7 +133,9 @@ const BarHeader = styled.div<{
     left: 0;
     height: 100%;
     width: 4px;
-    background-color: #5882fa;
+    ${({ theme }) => css`
+      background: ${theme.colors.selected};
+    `};
   }
 `;
 
@@ -152,7 +162,9 @@ const BarListItem = styled.div`
   width: 100%;
   height: 90px;
   &: hover {
-    background: #ededed;
+    ${({ theme }) => css`
+      background: ${theme.colors.hover};
+    `};
   }
   cursor: pointer;
   display: inline-flex;
@@ -167,7 +179,9 @@ const BarListItem = styled.div`
     left: 0;
     height: 100%;
     width: 4px;
-    background-color: #5882fa;
+    ${({ theme }) => css`
+      background: ${theme.colors.selected};
+    `};
   }
 `;
 

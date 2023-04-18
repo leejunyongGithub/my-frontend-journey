@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 function Content() {
   return (
@@ -18,13 +18,21 @@ const StyledContent = styled.div`
   overflow-x: hidden;
   background: #fff;
 
+  ${({ theme }) => css`
+    background: ${theme.colors.content};
+
+    transition: all 0.3s ease-in-out;
+  `};
+
   &.content-wrap::-webkit-scrollbar {
     width: 10px; /* 스크롤바의 너비 */
   }
 
   &.content-wrap::-webkit-scrollbar-thumb {
     height: 30%; /* 스크롤바의 길이 */
-    background: #58acfa; /* 스크롤바의 색상 */
+    ${({ theme }) => css`
+      background: ${theme.colors.scroll};
+    `};
   }
 
   &.content-wrap::-webkit-scrollbar-track {

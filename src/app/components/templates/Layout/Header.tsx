@@ -1,6 +1,6 @@
 import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { SlFire, SlArrowRight, SlArrowLeft } from "react-icons/sl";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import ToggleButton from "../../molecules/ToggleButton/ToggleButton";
@@ -62,6 +62,11 @@ const StyledHeader = styled.header`
   align-items: center;
   padding-right: 16px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 2px;
+  ${({ theme }) => css`
+    background: ${theme.colors.background};
+    color: ${theme.colors.color};
+  `};
+  transition: all 0.3s ease-in-out;
 `;
 
 const HeaderButton = styled.div`

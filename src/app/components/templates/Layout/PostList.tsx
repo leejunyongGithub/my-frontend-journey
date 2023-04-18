@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
 import { useRecoilValue } from "recoil";
 import MenuSelectList from "../../molecules/MenuSelectList/MenuSelectList";
@@ -41,7 +41,6 @@ const PostListWrap = styled.div<{
   height: 100vh;
   display: inline-flex;
   flex-direction: column;
-  background: #d4e6ee;
   transition: width 0.5s;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.024) -1px 0px 0px 0px inset;
@@ -51,6 +50,14 @@ const PostListWrap = styled.div<{
   ::-webkit-scrollbar {
     display: none;
   }
+
+  ${({ theme }) => css`
+    background: ${theme.colors.postBackground};
+    * {
+      color: ${theme.colors.color} !important;
+    }
+  `};
+  transition: all 0.3s ease-in-out;
 `;
 
 const ListContent = styled.div`
