@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { recoilStateOption } from "@/recoilState/recoilStateOption";
+import { useEffect } from "react";
 
 export default function Home() {
   const option = useRecoilValue(recoilStateOption);
@@ -49,6 +50,17 @@ const HomeContentWrap = styled.div<{
   padding: 2rem;
 
   color: ${(props) => props.fontColor};
+
+  animation: fadein 1s;
+
+  @keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 `;
 
 const HomeHeader = styled.div`
