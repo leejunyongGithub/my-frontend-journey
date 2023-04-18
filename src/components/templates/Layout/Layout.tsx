@@ -5,7 +5,7 @@ import Flex from "./Flex";
 import Content from "./Content";
 import PostList from "./PostList";
 import { useRecoilValue } from "recoil";
-import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
+import { recoilStateOption } from "@/recoilState/recoilStateOption";
 
 const light = {
   colors: {
@@ -17,7 +17,7 @@ const light = {
     scroll: "#58acfa",
     content: "#fff",
     tooltip: "",
-    contentHover: "#95c3f5"
+    contentHover: "#95c3f5",
   },
 };
 
@@ -31,13 +31,15 @@ const dark = {
     scroll: "#ca1560",
     content: "#4a4a4a",
     tooltip: "#e52b88",
-    contentHover: "#353332"
+    contentHover: "#353332",
   },
 };
 
-function Layout() {
+function Layout(props: any) {
   const option = useRecoilValue(recoilStateOption);
   const { mode } = option;
+  const { children } = props;
+
   return (
     <ThemeProvider theme={mode === "dark" ? dark : light}>
       <StyledLayout>
@@ -46,7 +48,7 @@ function Layout() {
           <PostList />
           <Flex mode="column">
             <Header />
-            <Content />
+            <Content>{children}</Content>
           </Flex>
         </Flex>
       </StyledLayout>

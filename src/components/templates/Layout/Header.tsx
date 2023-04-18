@@ -1,4 +1,4 @@
-import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
+import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled, { css } from "styled-components";
 import { SlMouse, SlArrowRight, SlArrowLeft } from "react-icons/sl";

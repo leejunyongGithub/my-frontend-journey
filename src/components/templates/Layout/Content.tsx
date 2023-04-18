@@ -1,18 +1,15 @@
+import { ReactNode } from "react";
 import styled, { css } from "styled-components";
 
-function Content() {
-  return (
-    <StyledContent className="content-wrap">
-      <div style={{ height: "2000px" }}></div>
-    </StyledContent>
-  );
+function Content({ children }: { children: ReactNode }) {
+  return <StyledContent className="content-wrap">{children}</StyledContent>;
 }
 
 export default Content;
 
 const StyledContent = styled.div`
   width: 100%;
-  height: calc(100vh - 50px);
+  min-height: calc(100vh - 50px);
   max-height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;

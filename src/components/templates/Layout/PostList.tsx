@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
+import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilValue } from "recoil";
 import MenuSelectList from "../../molecules/MenuSelectList/MenuSelectList";
 import MenuButton from "../../molecules/MenuButton/MenuButton";

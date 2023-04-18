@@ -1,10 +1,11 @@
 import "react-tooltip/dist/react-tooltip.css";
-import { recoilStateOption } from "@/app/recoilState/recoilStateOption";
+import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled, { css } from "styled-components";
 import { VscGithubAlt } from "react-icons/vsc";
-import { SlSocialInstagram,SlHome,SlGrid } from "react-icons/sl";
+import { SlSocialInstagram, SlHome, SlGrid } from "react-icons/sl";
 import { Tooltip } from "react-tooltip";
+import Link from "next/link";
 
 function MenuBar() {
   const [option, setOption] = useRecoilState(recoilStateOption);
@@ -28,28 +29,34 @@ function MenuBar() {
 
   return (
     <StyledMenuBar expanded={expanded}>
-      <BarHeader
-        expanded={expanded}
-        className={selected === "logo" ? "selected-item" : ""}
-        onClick={() => handleChangeSide("logo")}
-      >
-        <HeaderLogo id="main" />
-      </BarHeader>
+      <Link href="/">
+        <BarHeader
+          expanded={expanded}
+          className={selected === "logo" ? "selected-item" : ""}
+          onClick={() => handleChangeSide("logo")}
+        >
+          <HeaderLogo id="main" />
+        </BarHeader>
+      </Link>
       <BarList>
-        <BarListItem
-          id="home"
-          className={selected === "home" ? "selected-item" : ""}
-          onClick={() => handleChangeSide("home")}
-        >
-          <SlHome size={30} />
-        </BarListItem>
-        <BarListItem
-          id="content"
-          className={selected === "post" ? "selected-item" : ""}
-          onClick={() => handleChangeSide("post")}
-        >
-          <SlGrid size={30} />
-        </BarListItem>
+        <Link href="/introduce">
+          <BarListItem
+            id="home"
+            className={selected === "home" ? "selected-item" : ""}
+            onClick={() => handleChangeSide("home")}
+          >
+            <SlHome size={30} />
+          </BarListItem>
+        </Link>
+        <Link href="/post">
+          <BarListItem
+            id="content"
+            className={selected === "post" ? "selected-item" : ""}
+            onClick={() => handleChangeSide("post")}
+          >
+            <SlGrid size={30} />
+          </BarListItem>
+        </Link>
       </BarList>
 
       <div style={{ position: "absolute", left: "0px", bottom: "0px", width: "100%" }}>
@@ -155,6 +162,10 @@ const BarList = styled.div`
   gap: 16px;
   align-items: center;
   margin-top: 16px;
+
+  a {
+    width: 100%;
+  }
 `;
 
 const BarListItem = styled.div`
@@ -165,6 +176,7 @@ const BarListItem = styled.div`
       background: ${theme.colors.hover};
     `};
   }
+
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -187,6 +199,6 @@ const BarListItem = styled.div`
 const StyledTooltip = styled(Tooltip)`
   z-index: 999;
   ${({ theme }) => css`
-  background: ${theme.colors.tooltip} !important;
-`};
+    background: ${theme.colors.tooltip} !important;
+  `};
 `;
