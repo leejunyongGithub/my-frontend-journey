@@ -51,6 +51,10 @@ const PostListWrap = styled.div<{
     display: none;
   }
 
+  @media all and (max-width: 1024px) {
+    display: none;
+  }
+
   ${({ theme }) => css`
     background: ${theme.colors.postBackground};
     * {

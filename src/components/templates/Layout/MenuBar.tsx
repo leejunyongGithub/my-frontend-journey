@@ -25,8 +25,6 @@ function MenuBar() {
     });
   };
 
-  //const { mode } = option;
-
   return (
     <StyledMenuBar expanded={expanded}>
       <Link href="/">
@@ -111,7 +109,13 @@ const StyledMenuBar = styled.aside<{
     color: ${theme.colors.color};
   `};
 
+  user-select: none;
+
   transition: all 0.3s ease-in-out;
+
+  @media all and (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 const BarHeader = styled.div<{
@@ -201,4 +205,8 @@ const StyledTooltip = styled(Tooltip)`
   ${({ theme }) => css`
     background: ${theme.colors.tooltip} !important;
   `};
+
+  @media all and (max-width: 1024px) {
+    display: none;
+  }
 `;
