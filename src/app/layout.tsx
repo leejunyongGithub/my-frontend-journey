@@ -1,6 +1,7 @@
 import "./globals.css";
 import RootStyleRegistry from "../lib/RootStyleRegistry";
 import Main from "@/components/templates/Layout/Main";
+import "github-markdown.css";
 
 export const metadata = {
   title: "준키위키 블로그",

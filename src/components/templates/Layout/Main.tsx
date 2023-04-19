@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { ReactNode } from "react";
 import Layout from "./Layout";
 import { RecoilRoot } from "recoil";

@@ -2,7 +2,6 @@
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { recoilStateOption } from "@/recoilState/recoilStateOption";
-import { useEffect } from "react";
 
 export default function Home() {
   const option = useRecoilValue(recoilStateOption);

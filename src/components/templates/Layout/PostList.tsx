@@ -10,18 +10,18 @@ const OPTIONS = ["테스트글1", "테스트글2", "테스트글3", "테스트�
 
 function PostList() {
   const option = useRecoilValue(recoilStateOption);
-  const { subExpanded, category } = option;
+  const { subExpanded } = option;
 
   return (
     <PostListWrap expanded={subExpanded}>
       <ListContent className={subExpanded ? "show" : ""}>
-        {CATEGORY.map((item: any) => (
+        {CATEGORY?.map((item: any) => (
           <MenuSelectList
             className="no-scrollbar"
-            key={item}
+            key={item.name}
             trigger={
               <MenuButton icon={<SlFolder />}>
-                <span>{item}</span>
+                <span>{item.name}</span>
               </MenuButton>
             }
             options={OPTIONS}
