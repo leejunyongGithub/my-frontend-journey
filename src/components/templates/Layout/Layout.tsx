@@ -12,12 +12,14 @@ const light = {
     background: "#fbfbfa",
     color: "#5d5d5d",
     selected: "#5882fa",
-    postBackground: "#d4e6ee",
+    postBackground: "#fafafa",
     hover: "#ededed",
     scroll: "#58acfa",
     content: "#fff",
     tooltip: "",
+    text: "#000",
     contentHover: "#95c3f5",
+    borderBottom: "#ededed",
   },
 };
 
@@ -31,21 +33,23 @@ const dark = {
     scroll: "#ca1560",
     content: "#4a4a4a",
     tooltip: "#e52b88",
+    text: "#fff",
     contentHover: "#353332",
+    borderBottom: "#3f3f3f",
   },
 };
 
 function Layout(props: any) {
   const option = useRecoilValue(recoilStateOption);
   const { mode } = option;
-  const { children } = props;
+  const { children, postData } = props;
 
   return (
     <ThemeProvider theme={mode === "dark" ? dark : light}>
       <StyledLayout>
         <Flex>
           <MenuBar />
-          <PostList />
+          <PostList postData={postData} />
           <Flex mode="column">
             <Header />
             <Content>{children}</Content>

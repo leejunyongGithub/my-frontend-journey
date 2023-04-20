@@ -13,11 +13,10 @@ const StyledContent = styled.div`
   max-height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  background: #fff;
+  position: relative;
 
   ${({ theme }) => css`
-    background: ${theme.colors.content};
-
+    background: ${theme.colors.content} !important;
     transition: all 0.3s ease-in-out;
   `};
 
@@ -29,6 +28,14 @@ const StyledContent = styled.div`
     height: 30%; /* 스크롤바의 길이 */
     ${({ theme }) => css`
       background: ${theme.colors.scroll};
+    `};
+  }
+
+  .markdown-body {
+    ${({ theme }) => css`
+      background: ${theme.colors.content} !important;
+      color: ${theme.colors.text} !important;
+      transition: all 0.3s ease-in-out;
     `};
   }
 

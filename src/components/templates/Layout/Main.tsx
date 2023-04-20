@@ -1,12 +1,12 @@
 "use client";
-import { ReactNode } from "react";
 import Layout from "./Layout";
 import { RecoilRoot } from "recoil";
 
-function Main({ children }: { children: ReactNode }) {
+function Main(props: any) {
+  const { children, postData } = props;
   return (
     <RecoilRoot>
-      <Layout>{children}</Layout>
+      <Layout postData={postData}>{children}</Layout>
     </RecoilRoot>
   );
 }

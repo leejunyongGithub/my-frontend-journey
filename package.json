@@ -22,6 +22,7 @@
     "eslint-config-next": "13.3.0",
     "github-markdown-css": "^5.2.0",
     "graphql": "^16.6.0",
+    "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
     "next": "13.3.0",
     "react": "18.2.0",
@@ -31,6 +32,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-tooltip": "^5.11.1",
     "recoil": "^0.7.7",
+    "remark-gfm": "^3.0.1",
     "styled-components": "^5.3.9",
     "typescript": "5.0.4"
   }

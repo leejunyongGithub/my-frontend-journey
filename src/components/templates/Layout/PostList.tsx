@@ -4,27 +4,32 @@ import { useRecoilValue } from "recoil";
 import MenuSelectList from "../../molecules/MenuSelectList/MenuSelectList";
 import MenuButton from "../../molecules/MenuButton/MenuButton";
 import { SlFolder } from "react-icons/sl";
+import { filterCategoryList, filterPostList } from "@/utils";
 
 const CATEGORY = ["프론트엔드", "React", "잡담", "키위와포도"];
 const OPTIONS = ["테스트글1", "테스트글2", "테스트글3", "테스트글4"];
 
-function PostList() {
+function PostList(props: any) {
+  const { postData } = props;
   const option = useRecoilValue(recoilStateOption);
   const { subExpanded } = option;
+
+  const categoryList = filterCategoryList(postData);
+  const filterData = filterPostList(postData);
 
   return (
     <PostListWrap expanded={subExpanded}>
       <ListContent className={subExpanded ? "show" : ""}>
-        {CATEGORY?.map((item: any) => (
+        {categoryList?.map((item: any) => (
           <MenuSelectList
             className="no-scrollbar"
-            key={item.name}
+            key={item.frontMatter.category}
             trigger={
-              <MenuButton icon={<SlFolder />}>
-                <span>{item.name}</span>
+              <MenuButton icon={<SlFolder size={16} />}>
+                <span>{item.frontMatter.category}</span>
               </MenuButton>
             }
-            options={OPTIONS}
+            options={filterData?.[item.frontMatter.category] || []}
           />
         ))}
       </ListContent>
