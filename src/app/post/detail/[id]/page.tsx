@@ -4,7 +4,7 @@ import fs from "fs";
 async function fetchData(params: any) {
   try {
     var decodeName = decodeURI(decodeURIComponent(params?.id));
-    const post = fs.readFileSync(`public/posts/${decodeName}.md`).toString();
+    const post = fs.readFileSync(`src/posts/${decodeName}.md`).toString();
     return {
       props: { post },
     };
@@ -17,7 +17,7 @@ async function fetchData(params: any) {
 }
 
 export async function generateStaticParams(a: any) {
-  const posts = fs.readdirSync("public/posts").map((file) => file.split(".")[0]);
+  const posts = fs.readdirSync("src/posts").map((file) => file.split(".")[0]);
   const paths = posts
     .filter((file) => file.match(/\.md$/))
     .map((post) => ({
