@@ -1,13 +1,10 @@
 import styled, { css } from "styled-components";
 import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilValue } from "recoil";
-import MenuSelectList from "../../molecules/MenuSelectList/MenuSelectList";
-import MenuButton from "../../molecules/MenuButton/MenuButton";
 import { SlFolder } from "react-icons/sl";
 import { filterCategoryList, filterPostList } from "@/utils";
-
-const CATEGORY = ["프론트엔드", "React", "잡담", "키위와포도"];
-const OPTIONS = ["테스트글1", "테스트글2", "테스트글3", "테스트글4"];
+import MenuSelectList from "./Dropdown/MenuSelectList";
+import MenuButton from "./Button/MenuButton";
 
 function PostList(props: any) {
   const { postData } = props;

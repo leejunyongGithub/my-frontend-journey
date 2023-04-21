@@ -4,9 +4,9 @@ import styled, { css } from "styled-components";
 import { SlMouse, SlArrowRight, SlArrowLeft, SlHome, SlGrid, SlSocialInstagram } from "react-icons/sl";
 import { VscGithubAlt } from "react-icons/vsc";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
-import ToggleButton from "../../molecules/ToggleButton/ToggleButton";
 import { useState } from "react";
 import Link from "next/link";
+import ToggleButton from "./Button/ToggleButton";
 
 function Header() {
   const [option, setOption] = useRecoilState(recoilStateOption);

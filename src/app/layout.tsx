@@ -1,7 +1,7 @@
 import "./globals.css";
 import RootStyleRegistry from "../lib/RootStyleRegistry";
-import Main from "@/components/templates/Layout/Main";
 import getPostData from "@/lib/posts";
+import Main from "@/components/common/Main";
 
 export const metadata = {
   title: "준키위키 블로그",
