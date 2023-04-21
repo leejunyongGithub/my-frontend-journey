@@ -2,10 +2,13 @@ import MarkdownView from "@/components/MarkdownView";
 import fs from "fs";
 import path from "path";
 
+const postsDirectory = path.join(process.cwd(), 'src/blogposts')
+
 async function fetchData(params: any) {
   try {
     var decodeName = decodeURI(decodeURIComponent(params.slug));
-    const post = fs.readFileSync(path.join(`public/posts/${decodeName}.md`)).toString();
+    const filePath = path.join(postsDirectory, `${decodeName}.md`)
+    const post = fs.readFileSync(filePath).toString();
     return {
       props: { post },
     };
@@ -18,7 +21,7 @@ async function fetchData(params: any) {
 }
 
 export async function generateStaticParams(a: any) {
-  const posts = fs.readdirSync(path.join(`public/posts/`)).map((file) => file.split(".")[0]);
+  const posts = fs.readdirSync(postsDirectory).map((file) => file.split(".")[0]);
   const paths = posts.map((el) => {
     return {
       params: {
