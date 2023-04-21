@@ -11,6 +11,14 @@ const nextConfig = {
     domains: ["webtlify.kr"],
     formats: ["image/avif", "image/webp"],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/posts/:slug',
+        destination: '/post/:slug',
+      },
+    ]
+  },
 };
 
 module.exports = nextConfig;
