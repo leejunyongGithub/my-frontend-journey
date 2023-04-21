@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
-import DropdownWrapper from "../../atoms/Dropdown/Dropdown";
 import { useState } from "react";
 import { SlDoc } from "react-icons/sl";
 import Link from "next/link";
+import DropdownWrapper from "./Dropdown";
 
 function MenuSelectList({ trigger, options }: any) {
   const [selected, change] = useState("");

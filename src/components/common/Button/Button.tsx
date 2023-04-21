@@ -1,4 +1,4 @@
-import ButtonWrapper from "./ButtonWrapper";
+import ButtonWrapper from "../../wrapper/ButtonWrapper";
 
 function Button({ ...props }: any) {
   const { id, onClick, children, className } = props;

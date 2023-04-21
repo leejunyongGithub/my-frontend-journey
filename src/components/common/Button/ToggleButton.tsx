@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
-import Button from "../../atoms/Button/Button";
+import Button from "./Button";
 
 interface Props {
   color?: string;

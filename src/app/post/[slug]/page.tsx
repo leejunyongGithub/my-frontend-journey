@@ -1,4 +1,4 @@
-import MarkdownView from "@/components/MarkdownView";
+import MarkdownView from "@/components/common/MarkdownView";
 import fs from "fs";
 import path from "path";
 

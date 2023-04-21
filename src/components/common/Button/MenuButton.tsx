@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Button from "../../atoms/Button/Button";
+import Button from "./Button";
 
 function MenuButton({ children, icon, height, size }: any) {
   return (
