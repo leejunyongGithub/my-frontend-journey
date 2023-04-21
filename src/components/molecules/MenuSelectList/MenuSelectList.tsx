@@ -17,7 +17,7 @@ function MenuSelectList({ trigger, options }: any) {
         <StyledTrigger trigger={trigger} />
         <StyledMenu>
           {options?.map((option: any, index: string | number) => (
-            <Link key={option.slug} href={`/post/detail/${option.slug}`}>
+            <Link key={option.slug} href={`/post/${option.slug}`}>
               <StyledItem key={index}>
                 <SlDoc />
                 <span>{option.frontMatter.title}</span>

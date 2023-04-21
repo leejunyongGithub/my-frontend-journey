@@ -1,5 +1,5 @@
-function PostList() {
-  return <>postList</>;
+function Post() {
+    return <>post</>
 }
 
-export default PostList;
+export default Post;
