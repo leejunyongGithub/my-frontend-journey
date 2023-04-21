@@ -33,10 +33,10 @@ function DropdownWrapper({ value, onChange, children }: any) {
 }
 
 function Trigger(props: any) {
-  const { trigger } = props;
+  const { trigger, style } = props;
   const { isOpen, handleClose, handleOpen } = useDropdownContext();
   return (
-    <StyledTrigger onClick={!isOpen ? handleOpen : handleClose} {...props}>
+    <StyledTrigger onClick={!isOpen ? handleOpen : handleClose} style={isOpen ? { ...style } : {}} {...props}>
       {trigger}
     </StyledTrigger>
   );
@@ -68,7 +68,7 @@ DropdownWrapper.Item = Item;
 
 export default DropdownWrapper;
 
-const useDropdownContext = () => {
+export const useDropdownContext = () => {
   const context = useContext(DropdownContext);
   if (context === null) {
     throw new Error("useDropdownContext must be used within a DropdownProvider");
@@ -76,7 +76,9 @@ const useDropdownContext = () => {
   return context;
 };
 
-const StyledTrigger = styled.div`
+const StyledTrigger = styled.div<{
+  isOpen: boolean;
+}>`
   width: 200px;
   min-height: 30px;
   user-select: none;
@@ -92,5 +94,5 @@ const StyledItem = styled.div<{
 const StyledList = styled.div<{
   isOpen: boolean;
 }>`
-  height: ${(props) => (props.isOpen ? "200px" : "0px")};
+  height: ${(props) => (props.isOpen ? "100%" : "0px")};
 `;

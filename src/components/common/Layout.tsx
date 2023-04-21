@@ -6,6 +6,7 @@ import Content from "./Content";
 import PostList from "./PostList";
 import { useRecoilValue } from "recoil";
 import { recoilStateOption } from "@/recoilState/recoilStateOption";
+import { Noto_Sans_KR } from "next/font/google";
 
 const light = {
   colors: {
@@ -28,16 +29,18 @@ const dark = {
     background: "#353332",
     color: "#fff",
     selected: "#e52b88",
-    postBackground: "#666",
+    postBackground: "#272727",
     hover: "#5d5959",
     scroll: "#ca1560",
-    content: "#4a4a4a",
+    content: "#292929",
     tooltip: "#e52b88",
     text: "#fff",
     contentHover: "#353332",
     borderBottom: "#3f3f3f",
   },
 };
+
+const notoSans = Noto_Sans_KR({ weight: "400", subsets: ["latin"] });
 
 function Layout(props: any) {
   const option = useRecoilValue(recoilStateOption);
@@ -46,7 +49,7 @@ function Layout(props: any) {
 
   return (
     <ThemeProvider theme={mode === "dark" ? dark : light}>
-      <StyledLayout>
+      <StyledLayout className={notoSans.className}>
         <Flex>
           <MenuBar />
           <PostList postData={postData} />

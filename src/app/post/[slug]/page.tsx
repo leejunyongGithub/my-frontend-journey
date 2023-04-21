@@ -1,13 +1,14 @@
 import MarkdownView from "@/components/common/MarkdownView";
 import fs from "fs";
 import path from "path";
+import { notFound } from "next/navigation";
 
-const postsDirectory = path.join(process.cwd(), 'src/blogposts')
+const postsDirectory = path.join(process.cwd(), "src/blogposts");
 
 async function fetchData(params: any) {
   try {
     var decodeName = decodeURI(decodeURIComponent(params.slug));
-    const filePath = path.join(postsDirectory, `${decodeName}.md`)
+    const filePath = path.join(postsDirectory, `${decodeName}.md`);
     const post = fs.readFileSync(filePath).toString();
     return {
       props: { post },
@@ -37,6 +38,12 @@ async function Post({ params }: any) {
   const data = await fetchData(params);
   const { props } = data;
   const { post } = props;
+
+  // 없는 페이지를 호출시 notFound Page로 이동
+  if (!post) {
+    notFound();
+  }
+  
   return (
     <div
       className="markdown-body"

@@ -62,8 +62,10 @@ const StyledItem = styled(DropdownWrapper.Item)`
   gap: 4px;
   &: hover {
     ${({ theme }) => css`
-      background: ${theme.colors.contentHover};
-      color: ${theme.colors.color};
+      background: #85a9e01a;
+      color: #183055;
+      font-weight: 700 !important;
+      border-radius: 0.3rem;
     `};
   }
   box-sizing: border-box;

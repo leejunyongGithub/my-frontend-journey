@@ -1,28 +1,52 @@
+"use client";
 import styled, { css } from "styled-components";
 import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilValue } from "recoil";
-import { SlFolder } from "react-icons/sl";
+import { SlFolder, SlArrowRight } from "react-icons/sl";
 import { filterCategoryList, filterPostList } from "@/utils";
 import MenuSelectList from "./Dropdown/MenuSelectList";
 import MenuButton from "./Button/MenuButton";
+import { useState } from "react";
+import SearchInput from "./Input/SearchInput";
 
 function PostList(props: any) {
+  const [search, change] = useState<string>("");
+
+  const handleChangeValue = (e: any) => {
+    const { value } = e.target;
+    change(value);
+  };
+  const clearValue = () => {
+    change("");
+  };
+
   const { postData } = props;
   const option = useRecoilValue(recoilStateOption);
   const { subExpanded } = option;
 
+  const filterList =
+    postData?.filter((item: any) => {
+      const { frontMatter } = item;
+      const { title } = frontMatter;
+      return title.toLowerCase().includes(search.toLowerCase());
+    }) || [];
+
   const categoryList = filterCategoryList(postData);
-  const filterData = filterPostList(postData);
+  const filterData = filterPostList(filterList);
 
   return (
     <PostListWrap expanded={subExpanded}>
       <ListContent className={subExpanded ? "show" : ""}>
+        <div style={{ marginBottom: "5px" }}>
+          글 <span style={{ color: "#978c8c !important" }}>{`(${postData?.length || 0})`}</span>
+        </div>
+        <SearchInput value={search} onChange={handleChangeValue} clearValue={clearValue} />
         {categoryList?.map((item: any) => (
           <MenuSelectList
             className="no-scrollbar"
             key={item.frontMatter.category}
             trigger={
-              <MenuButton icon={<SlFolder size={16} />}>
+              <MenuButton icon={<SlArrowRight size={16} />}>
                 <span>{item.frontMatter.category}</span>
               </MenuButton>
             }
@@ -59,9 +83,8 @@ const PostListWrap = styled.div<{
 
   ${({ theme }) => css`
     background: ${theme.colors.postBackground};
-    * {
-      color: ${theme.colors.color} !important;
-    }
+      color: ${theme.colors.color};
+    border-right: 1px solid ${theme.colors.borderBottom};
   `};
   transition: all 0.3s ease-in-out;
 `;

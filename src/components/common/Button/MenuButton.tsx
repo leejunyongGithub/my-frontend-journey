@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Button from "./Button";
 
-function MenuButton({ children, icon, height, size }: any) {
+function MenuButton({ children, icon, height, size, style }: any) {
   return (
     <MenuBtn height={height} size={size}>
-      {icon}
       {children}
+      {icon}
     </MenuBtn>
   );
 }
@@ -21,7 +21,7 @@ const MenuBtn = styled(Button)<{
   text-align: left;
   padding: 4px;
   box-sizing: border-box;
-  border:none;
+  border: none;
   background: none;
   display: inline-flex;
   align-items: center;
@@ -30,4 +30,10 @@ const MenuBtn = styled(Button)<{
   box-sizing: border-box;
   font-size: 20px;
   line-height: 10px;
+  justify-content: space-between;
+  border-radius: 0.3rem;
+
+  ${({ theme }) => css`
+    color: ${theme.colors.color};
+  `};
 `;

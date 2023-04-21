@@ -52,7 +52,7 @@ function Header() {
 
   return (
     <StyledHeader>
-      <Link href="/">
+      {/* <Link href="/">
         <MobileButton menu={selected === "logo"} onClick={() => handleChangeSide("logo")}>
           <div className="img-btn" />
         </MobileButton>
@@ -66,7 +66,7 @@ function Header() {
         <MobileButton menu={selected === "post"} onClick={() => handleChangeSide("post")}>
           <SlGrid />
         </MobileButton>
-      </Link>
+      </Link> */}
       <HeaderButton onClick={handleChangeMenuBar}>
         {expanded ? <SlArrowLeft size={20} /> : <SlArrowRight size={20} />}
       </HeaderButton>
@@ -77,7 +77,7 @@ function Header() {
         </HeaderButton>
       )}
       <HeaderToggleButton>
-        <div>
+        {/* <div>
           <a href="https://www.instagram.com/kiwipodo/" target="_blank">
             <MobileButton menu={selected === "instagram"} onClick={() => handleChangeSide("instagram")}>
               <SlSocialInstagram />
@@ -88,7 +88,7 @@ function Header() {
               <VscGithubAlt />
             </MobileButton>
           </a>
-        </div>
+        </div> */}
         <HiOutlineSun size={20} />
         <ToggleButton width={40} height={20} toggle={toggle} onClick={handleChangeToggle} />
         <HiOutlineMoon size={20} />
