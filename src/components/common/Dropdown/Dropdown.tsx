@@ -13,9 +13,7 @@ const DropdownContext = createContext<DropdownContextValue | null>(null);
 
 function DropdownWrapper({ value, onChange, children }: any) {
   // Dropdown 에서 하는 역활
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  // Context를 생성 해주는건 하위 컴포넌트들에게 기능을 부여함 props 드릴링으로 가능하지만 가독성이 떨어짐..
+  const [isOpen, setIsOpen] = useState<boolean>(value ? true : false);
 
   const handleOpen = () => {
     setIsOpen(true);
