@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import SyntaxHighlighter from "react-syntax-highlighter";

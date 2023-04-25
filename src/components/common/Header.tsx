@@ -6,10 +6,9 @@ import { SlMouse, SlArrowRight, SlArrowLeft, SlHome, SlGrid, SlSocialInstagram }
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import ToggleButton from "./Button/ToggleButton";
 import { LAYOUT_KEY } from "@/constants";
-import { getItem, setItem } from "@/utils";
+import { setItem } from "@/utils";
 
 function Header() {
-  //const [option, setOption] = useRecoilState(recoilStateOption);
   const [option, setOption] = useRecoilState(recoilStateOption);
 
   const { expanded, menu: selected, subExpanded, mode } = option;

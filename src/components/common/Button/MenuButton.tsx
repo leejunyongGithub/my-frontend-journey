@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 import Button from "./Button";
 
-function MenuButton({ children, icon, height, size, style }: any) {
+function MenuButton({ children, icon, height, size, color }: any) {
   return (
-    <MenuBtn height={height} size={size}>
+    <MenuBtn height={height} size={size} color={color}>
       {children}
       {icon}
     </MenuBtn>
@@ -15,6 +15,7 @@ export default MenuButton;
 const MenuBtn = styled(Button)<{
   height: string | number;
   size: string | number;
+  color?: string;
 }>`
   width: 100%;
   height: ${(props) => (props?.height ? `${props.height}px` : "50px")} !important;
@@ -33,7 +34,5 @@ const MenuBtn = styled(Button)<{
   justify-content: space-between;
   border-radius: 0.3rem;
 
-  ${({ theme }) => css`
-    color: ${theme.colors.color};
-  `};
+  color: ${(props) => (props.color ? props.color : "#fff")};
 `;

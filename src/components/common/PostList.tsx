@@ -2,11 +2,11 @@
 import styled, { css } from "styled-components";
 import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilValue } from "recoil";
-import { SlFolder, SlArrowRight } from "react-icons/sl";
+import { SlArrowRight } from "react-icons/sl";
 import { filterCategoryList, filterPostList } from "@/utils";
 import MenuSelectList from "./Dropdown/MenuSelectList";
 import MenuButton from "./Button/MenuButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SearchInput from "./Input/SearchInput";
 
 function PostList(props: any) {
@@ -22,7 +22,7 @@ function PostList(props: any) {
 
   const { postData } = props;
   const option = useRecoilValue(recoilStateOption);
-  const { subExpanded } = option;
+  const { subExpanded, mode } = option;
 
   const filterList =
     postData?.filter((item: any) => {
@@ -46,7 +46,7 @@ function PostList(props: any) {
             className="no-scrollbar"
             key={item.frontMatter.category}
             trigger={
-              <MenuButton icon={<SlArrowRight size={16} />}>
+              <MenuButton icon={<SlArrowRight size={16} />} color={mode === "dark" ? "#fff" : "#5c6975"}>
                 <span>{item.frontMatter.category}</span>
               </MenuButton>
             }

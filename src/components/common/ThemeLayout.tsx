@@ -4,40 +4,8 @@ import { useRecoilState } from "recoil";
 import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useEffect, useState } from "react";
 import { getItem, setItem } from "@/utils";
-import { LAYOUT_KEY } from "@/constants";
+import { LAYOUT_KEY, dark, light } from "@/constants";
 import Loading from "../Loading";
-
-const light = {
-  colors: {
-    background: "#fbfbfa",
-    color: "#5d5d5d",
-    selected: "#5882fa",
-    postBackground: "#fff",
-    hover: "#ededed",
-    scroll: "#58acfa",
-    content: "#fff",
-    tooltip: "",
-    text: "#000",
-    contentHover: "#95c3f5",
-    borderBottom: "#ededed",
-  },
-};
-
-const dark = {
-  colors: {
-    background: "#353332",
-    color: "#fff",
-    selected: "#e52b88",
-    postBackground: "#272727",
-    hover: "#5d5959",
-    scroll: "#ca1560",
-    content: "#292929",
-    tooltip: "#e52b88",
-    text: "#fff",
-    contentHover: "#353332",
-    borderBottom: "#3f3f3f",
-  },
-};
 
 function ThemeLayout(props: any) {
   const { children } = props;

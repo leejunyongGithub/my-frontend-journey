@@ -19,7 +19,6 @@ function MenuSelectList({ trigger, options }: any) {
           {options?.map((option: any, index: string | number) => (
             <Link key={option.slug} href={`/post/${option.slug}`}>
               <StyledItem key={index}>
-                <SlDoc />
                 <span>{option.frontMatter.title}</span>
               </StyledItem>
             </Link>
@@ -48,8 +47,12 @@ const StyledMenu = styled(DropdownWrapper.Menu)`
   gap: 16px;
   box-sizing: border-box;
   overflow: hidden;
-  padding-left: 8px;
+  padding-left: 10px;
   padding-right: 8px;
+  margin-left: 20px;
+  ${({ theme }) => css`
+    border-left: 2px solid ${theme.colors.listItem};
+  `};
 `;
 
 const StyledItem = styled(DropdownWrapper.Item)`
@@ -59,25 +62,17 @@ const StyledItem = styled(DropdownWrapper.Item)`
   justify-content: flex-start;
   align-items: center;
   padding-left: 4px;
+  ${({ theme }) => css`
+    color: ${theme.colors.listText} !important;
+  `};
   gap: 4px;
   &: hover {
     ${({ theme }) => css`
-      background: #85a9e01a;
-      color: #183055;
+      background: ${theme.colors.listHoverBackground};
+      color: ${theme.colors.listHoverText} !important;
       font-weight: 700 !important;
       border-radius: 0.3rem;
     `};
   }
   box-sizing: border-box;
 `;
-
-// 선택됬을 때
-
-// &: hover {
-//   ${({ theme }) => css`
-//     background: #85a9e01a;
-//     color: #183055;
-//     font-weight: 700 !important;
-//     border-radius: 0.3rem;
-//   `};
-// }
