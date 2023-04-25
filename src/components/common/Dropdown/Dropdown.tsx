@@ -43,11 +43,11 @@ function Trigger(props: any) {
 }
 
 function Item(props: any) {
-  const { children, value: selected } = props;
+  const { children, value: selected, className } = props;
   const { onChange } = useDropdownContext();
 
   return (
-    <StyledItem {...props} onClick={() => onChange(selected)}>
+    <StyledItem {...props} onClick={() => onChange(selected)} classname={className}>
       {children}
     </StyledItem>
   );

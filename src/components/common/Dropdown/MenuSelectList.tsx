@@ -1,11 +1,14 @@
+"use client";
 import styled, { css } from "styled-components";
-import { useState } from "react";
-import { SlDoc } from "react-icons/sl";
+import React, { useState } from "react";
 import Link from "next/link";
 import DropdownWrapper from "./Dropdown";
+import { usePathname } from "next/navigation";
 
 function MenuSelectList({ trigger, options }: any) {
-  const [selected, change] = useState("");
+  const pathname = decodeURI(decodeURIComponent(usePathname()).replace("-", " "));
+  const isCheck = pathname?.substring(6) ? pathname.substring(6) : "";
+  const [selected, change] = useState(isCheck);
 
   const handleChangeSelected = (item: string) => {
     change(item);
@@ -18,7 +21,14 @@ function MenuSelectList({ trigger, options }: any) {
         <StyledMenu>
           {options?.map((option: any, index: string | number) => (
             <Link key={option.slug} href={`/post/${option.slug}`}>
-              <StyledItem key={index}>
+              <StyledItem
+                key={`${option.slug}-${index}`}
+                value={option.frontMatter.title}
+                className={
+                  selected === option.frontMatter.title && pathname.includes(option.frontMatter.title) ? "selected" : ""
+                }
+                onClick={() => handleChangeSelected(option.frontMatter.title)}
+              >
                 <span>{option.frontMatter.title}</span>
               </StyledItem>
             </Link>
@@ -29,7 +39,7 @@ function MenuSelectList({ trigger, options }: any) {
   );
 }
 
-export default MenuSelectList;
+export default React.memo(MenuSelectList);
 
 const StyledList = styled.div`
   width: 100%;
@@ -51,7 +61,7 @@ const StyledMenu = styled(DropdownWrapper.Menu)`
   padding-right: 8px;
   margin-left: 20px;
   ${({ theme }) => css`
-    border-left: 2px solid ${theme.colors.listItem};
+    border-left: 1px solid ${theme.colors.listItem};
   `};
 `;
 
@@ -61,7 +71,7 @@ const StyledItem = styled(DropdownWrapper.Item)`
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
-  padding-left: 4px;
+  padding-left: 12px;
   ${({ theme }) => css`
     color: ${theme.colors.listText} !important;
   `};
@@ -75,4 +85,13 @@ const StyledItem = styled(DropdownWrapper.Item)`
     `};
   }
   box-sizing: border-box;
+
+  &.selected {
+    ${({ theme }) => css`
+      background: ${theme.colors.listHoverBackground};
+      color: ${theme.colors.listHoverText} !important;
+      border-radius: 0.3rem;
+      font-weight: 700 !important;
+    `};
+  }
 `;
