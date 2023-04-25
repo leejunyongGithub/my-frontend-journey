@@ -2,18 +2,23 @@ import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled, { css } from "styled-components";
 import { SlMouse, SlArrowRight, SlArrowLeft, SlHome, SlGrid, SlSocialInstagram } from "react-icons/sl";
-import { VscGithubAlt } from "react-icons/vsc";
+//import { VscGithubAlt } from "react-icons/vsc";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
-import { useState } from "react";
-import Link from "next/link";
 import ToggleButton from "./Button/ToggleButton";
+import { LAYOUT_KEY } from "@/constants";
+import { getItem, setItem } from "@/utils";
 
 function Header() {
+  //const [option, setOption] = useRecoilState(recoilStateOption);
   const [option, setOption] = useRecoilState(recoilStateOption);
-  const [toggle, change] = useState<boolean>(false);
-  const { expanded, menu: selected, subExpanded } = option;
+
+  const { expanded, menu: selected, subExpanded, mode } = option;
 
   const handleChangeMenuBar = () => {
+    setItem(LAYOUT_KEY, {
+      ...option,
+      expanded: !option.expanded,
+    });
     setOption({
       ...option,
       expanded: !option.expanded,
@@ -27,6 +32,11 @@ function Header() {
     if (menu === "post") payload = { subExpanded: true };
     if (menu !== "post" && subExpanded) payload = { subExpanded: false };
 
+    setItem(LAYOUT_KEY, {
+      ...option,
+      expanded: menu,
+      ...payload,
+    });
     setOption({
       ...option,
       menu: menu,
@@ -35,6 +45,10 @@ function Header() {
   };
 
   const handleChangeSubBar = () => {
+    setItem(LAYOUT_KEY, {
+      ...option,
+      subExpanded: !option.subExpanded,
+    });
     setOption({
       ...option,
       subExpanded: !option.subExpanded,
@@ -42,12 +56,17 @@ function Header() {
   };
 
   const handleChangeToggle = () => {
-    const check = toggle ? "light" : "dark";
+    const check = mode === "light" ? "dark" : "light";
+
+    setItem(LAYOUT_KEY, {
+      ...option,
+      mode: check,
+    });
+
     setOption({
       ...option,
       mode: check,
     });
-    change((prev) => !prev);
   };
 
   return (
@@ -90,7 +109,7 @@ function Header() {
           </a>
         </div> */}
         <HiOutlineSun size={20} />
-        <ToggleButton width={40} height={20} toggle={toggle} onClick={handleChangeToggle} />
+        <ToggleButton width={40} height={20} toggle={mode === "light" ? false : true} onClick={handleChangeToggle} />
         <HiOutlineMoon size={20} />
       </HeaderToggleButton>
     </StyledHeader>

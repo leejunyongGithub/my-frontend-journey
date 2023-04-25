@@ -6,6 +6,8 @@ import { VscGithubAlt } from "react-icons/vsc";
 import { SlSocialInstagram, SlHome, SlGrid } from "react-icons/sl";
 import { Tooltip } from "react-tooltip";
 import Link from "next/link";
+import { setItem } from "@/utils";
+import { LAYOUT_KEY } from "@/constants";
 
 function MenuBar() {
   const [option, setOption] = useRecoilState(recoilStateOption);
@@ -17,6 +19,12 @@ function MenuBar() {
     let payload = {};
     if (menu === "post") payload = { subExpanded: true };
     if (menu !== "post" && subExpanded) payload = { subExpanded: false };
+
+    setItem(LAYOUT_KEY, {
+      ...option,
+      menu: menu,
+      ...payload,
+    });
 
     setOption({
       ...option,
@@ -39,9 +47,9 @@ function MenuBar() {
       <BarList>
         <Link href="/introduce">
           <BarListItem
-            id="home"
-            className={selected === "home" ? "selected-item" : ""}
-            onClick={() => handleChangeSide("home")}
+            id="introduce"
+            className={selected === "introduce" ? "selected-item" : ""}
+            onClick={() => handleChangeSide("introduce")}
           >
             <SlHome size={30} />
           </BarListItem>

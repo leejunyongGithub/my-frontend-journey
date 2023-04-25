@@ -34,6 +34,7 @@ const StyledInput = styled(InputWrapper.Input)`
 
   ${({ theme }) => css`
     background: ${theme.colors.content} !important;
+    color: ${theme.colors.text};
   `};
 
   transition: all 0.3s ease-in-out;
@@ -52,7 +53,7 @@ const StyledInputWrap = styled.div`
 
   ${({ theme }) => css`
     background: ${theme.colors.content} !important;
-    border: 1px solid ${theme.colors.borderBottom};
+    border: 2px solid ${theme.colors.borderBottom};
   `};
 
   &: focus {

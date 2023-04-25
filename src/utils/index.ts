@@ -29,3 +29,18 @@ export function filterPostList(list: []) {
 
   return filterData;
 }
+
+export function getItem(key: string = "") {
+  const data = localStorage?.getItem(key) || "";
+
+  if (data) {
+    return JSON.parse(data);
+  }
+
+  return data;
+}
+
+export function setItem(key: string, data: object) {
+  const parseData = JSON.stringify(data);
+  localStorage?.setItem(key, parseData);
+}

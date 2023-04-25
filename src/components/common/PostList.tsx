@@ -6,7 +6,7 @@ import { SlFolder, SlArrowRight } from "react-icons/sl";
 import { filterCategoryList, filterPostList } from "@/utils";
 import MenuSelectList from "./Dropdown/MenuSelectList";
 import MenuButton from "./Button/MenuButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchInput from "./Input/SearchInput";
 
 function PostList(props: any) {
@@ -83,7 +83,7 @@ const PostListWrap = styled.div<{
 
   ${({ theme }) => css`
     background: ${theme.colors.postBackground};
-      color: ${theme.colors.color};
+    color: ${theme.colors.color};
     border-right: 1px solid ${theme.colors.borderBottom};
   `};
   transition: all 0.3s ease-in-out;

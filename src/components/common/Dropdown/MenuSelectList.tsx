@@ -70,3 +70,14 @@ const StyledItem = styled(DropdownWrapper.Item)`
   }
   box-sizing: border-box;
 `;
+
+// 선택됬을 때
+
+// &: hover {
+//   ${({ theme }) => css`
+//     background: #85a9e01a;
+//     color: #183055;
+//     font-weight: 700 !important;
+//     border-radius: 0.3rem;
+//   `};
+// }

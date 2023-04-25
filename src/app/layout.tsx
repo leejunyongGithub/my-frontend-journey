@@ -1,7 +1,8 @@
 import "./globals.css";
 import RootStyleRegistry from "../lib/RootStyleRegistry";
-import getPostData from "@/lib/posts";
 import Main from "@/components/common/Main";
+import { getPostData } from "@/lib/posts";
+
 
 export const metadata = {
   title: "준키위키 블로그",
@@ -9,6 +10,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const postData = getPostData();
+
   return (
     <html lang="en">
       <body>
@@ -19,4 +21,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-

@@ -1,0 +1,1 @@
+export const LAYOUT_KEY = "WEB_BLOG_LAYOUT";
