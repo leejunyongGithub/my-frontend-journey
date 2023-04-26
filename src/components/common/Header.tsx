@@ -71,20 +71,21 @@ function Header() {
 
   return (
     <StyledHeader>
-      <Link href="/">
-        <MobileButton menu={selected === "logo"} onClick={() => handleChangeSide("logo")}>
-          <div className="img-btn" />
-        </MobileButton>
-      </Link>
-      <Link href="/post">
-        <MobileButton menu={selected === "post"} onClick={() => handleChangeSide("post")}>
-          <SlGrid />
-        </MobileButton>
-      </Link>
+      <div style={{ paddingLeft: "8px", display: "inline-flex", gap: "8px" }}>
+        <Link href="/">
+          <MobileButton menu={selected === "logo"} onClick={() => handleChangeSide("logo")}>
+            <div className="img-btn" />
+          </MobileButton>
+        </Link>
+        <Link href="/post">
+          <MobileButton menu={selected === "post"} onClick={() => handleChangeSide("post")}>
+            <SlGrid />
+          </MobileButton>
+        </Link>
+      </div>
       <HeaderButton onClick={handleChangeMenuBar}>
         {expanded ? <SlArrowLeft size={20} /> : <SlArrowRight size={20} />}
       </HeaderButton>
-
       {selected === "post" && (
         <HeaderButton onClick={handleChangeSubBar}>
           <>{subExpanded ? <SlMouse size={25} /> : <SlMouse size={25} color="red" />}</>
