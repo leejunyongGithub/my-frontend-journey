@@ -2,11 +2,12 @@ import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled, { css } from "styled-components";
 import { SlMouse, SlArrowRight, SlArrowLeft, SlHome, SlGrid, SlSocialInstagram } from "react-icons/sl";
-//import { VscGithubAlt } from "react-icons/vsc";
+import { VscGithubAlt } from "react-icons/vsc";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import ToggleButton from "./Button/ToggleButton";
 import { LAYOUT_KEY } from "@/constants";
 import { setItem } from "@/utils";
+import Link from "next/link";
 
 function Header() {
   const [option, setOption] = useRecoilState(recoilStateOption);
@@ -70,7 +71,7 @@ function Header() {
 
   return (
     <StyledHeader>
-      {/* <Link href="/">
+      <Link href="/">
         <MobileButton menu={selected === "logo"} onClick={() => handleChangeSide("logo")}>
           <div className="img-btn" />
         </MobileButton>
@@ -84,7 +85,7 @@ function Header() {
         <MobileButton menu={selected === "post"} onClick={() => handleChangeSide("post")}>
           <SlGrid />
         </MobileButton>
-      </Link> */}
+      </Link>
       <HeaderButton onClick={handleChangeMenuBar}>
         {expanded ? <SlArrowLeft size={20} /> : <SlArrowRight size={20} />}
       </HeaderButton>
@@ -95,7 +96,7 @@ function Header() {
         </HeaderButton>
       )}
       <HeaderToggleButton>
-        {/* <div>
+        <div>
           <a href="https://www.instagram.com/kiwipodo/" target="_blank">
             <MobileButton menu={selected === "instagram"} onClick={() => handleChangeSide("instagram")}>
               <SlSocialInstagram />
@@ -106,7 +107,7 @@ function Header() {
               <VscGithubAlt />
             </MobileButton>
           </a>
-        </div> */}
+        </div>
         <HiOutlineSun size={20} />
         <ToggleButton width={40} height={20} toggle={mode === "light" ? false : true} onClick={handleChangeToggle} />
         <HiOutlineMoon size={20} />
@@ -175,11 +176,11 @@ const MobileButton = styled.div<{
   }
 
   @media all and (min-width: 280px) and (max-width: 512px){
-    width: 30px;
+    width: 50px;
     height: 50px;
 
     .img-btn{
-      width: 30px;
+      width: 40px;
       height: 40px;
     }
   }

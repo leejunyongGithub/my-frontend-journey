@@ -1,18 +1,21 @@
 "use client";
+import { LAYOUT_KEY } from "@/constants";
+import { getItem } from "@/utils";
+import Image from "next/image";
 import styled from "styled-components";
 
 function Loading() {
-
-  const imgSrc = "/light_cat.svg";
+  const option = getItem(LAYOUT_KEY);
+  const { mode } = option;
+  const imgSrc = mode === "dark" ? "/dark_cat.svg" : "/light_cat.svg";
 
   return (
-    <LoadingWrap>
-      <img
+    <LoadingWrap mode={mode}>
+      <Image
         src={imgSrc}
-        style={{
-          width: "30%",
-          height: "30%",
-        }}
+        alt="loading"
+        width="150"
+        height="150"
       />
       <span style={{ marginTop: "24px", fontSize: "2rem", fontWeight: 700, color: "#000" }}>Loading...</span>
     </LoadingWrap>
@@ -21,7 +24,9 @@ function Loading() {
 
 export default Loading;
 
-const LoadingWrap = styled.div`
+const LoadingWrap = styled.div<{
+  mode?: string;
+}>`
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -30,5 +35,5 @@ const LoadingWrap = styled.div`
   align-items: center;
   justify-content: center;
   user-select: none;
-  background: #f2f0f0;
+  background: ${(props) => (props.mode === "dark" ? "#e7e7e7" : "#f2f0f0")};
 `;

@@ -2,6 +2,7 @@ import "./globals.css";
 import RootStyleRegistry from "../lib/RootStyleRegistry";
 import Main from "@/components/common/Main";
 import { getPostData } from "@/lib/posts";
+import { notFound } from "next/navigation";
 
 
 export const metadata = {
@@ -10,6 +11,10 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const postData = getPostData();
+
+  if(!children){
+    notFound();
+  }
 
   return (
     <html lang="en">

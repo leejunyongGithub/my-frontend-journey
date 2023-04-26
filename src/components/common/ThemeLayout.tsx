@@ -5,17 +5,22 @@ import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useEffect, useState } from "react";
 import { getItem, setItem } from "@/utils";
 import { LAYOUT_KEY, dark, light } from "@/constants";
-import Loading from "../Loading";
+import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const Loadings = dynamic(() => import("../Loading"), {
+  ssr: false,
+});
 
 function ThemeLayout(props: any) {
   const { children } = props;
   const [loading, setLoading] = useState(true);
   const [option, setOption] = useRecoilState(recoilStateOption);
   const { mode } = option;
+  const path = usePathname();
 
   useEffect(() => {
     const data = getItem(LAYOUT_KEY);
-    const path = window.location.pathname;
     const parsePath =
       path === "/"
         ? "logo"
@@ -39,10 +44,12 @@ function ThemeLayout(props: any) {
         setItem(LAYOUT_KEY, {
           ...data,
           menu: parsePath,
+          subExpanded: !path.includes("post") ? false : true,
         });
         setOption({
           ...data,
           menu: parsePath,
+          subExpanded: !path.includes("post") ? false : true,
         });
       } else {
         setOption(data);
@@ -53,7 +60,7 @@ function ThemeLayout(props: any) {
     }, 1500);
   }, []);
 
-  return <ThemeProvider theme={mode === "dark" ? dark : light}>{loading ? <Loading /> : children}</ThemeProvider>;
+  return <ThemeProvider theme={mode === "dark" ? dark : light}>{loading ? <Loadings /> : children}</ThemeProvider>;
 }
 
 export default ThemeLayout;

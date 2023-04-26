@@ -6,11 +6,14 @@ import { SlArrowRight } from "react-icons/sl";
 import { filterCategoryList, filterPostList } from "@/utils";
 import MenuSelectList from "./Dropdown/MenuSelectList";
 import MenuButton from "./Button/MenuButton";
-import { useState } from "react";
+import React, { useState } from "react";
 import SearchInput from "./Input/SearchInput";
 
 function PostList(props: any) {
   const [search, change] = useState<string>("");
+  const { postData } = props;
+  const option = useRecoilValue(recoilStateOption);
+  const { subExpanded, mode } = option;
 
   const handleChangeValue = (e: any) => {
     const { value } = e.target;
@@ -19,10 +22,6 @@ function PostList(props: any) {
   const clearValue = () => {
     change("");
   };
-
-  const { postData } = props;
-  const option = useRecoilValue(recoilStateOption);
-  const { subExpanded, mode } = option;
 
   const filterList =
     postData?.filter((item: any) => {
@@ -58,7 +57,7 @@ function PostList(props: any) {
   );
 }
 
-export default PostList;
+export default React.memo(PostList);
 
 const PostListWrap = styled.div<{
   expanded: boolean;
