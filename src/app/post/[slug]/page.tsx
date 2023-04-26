@@ -41,14 +41,6 @@ function Post({ params }: any) {
   return (
     <div
       className="markdown-body"
-      style={{
-        padding: "5rem",
-        position: "absolute",
-        display: "inline-flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        width: "calc(100vw - 400px)",
-      }}
     >
       <PostHeader data={description} />
       <div id="markdown-view" style={{ maxWidth: "900px" }}>

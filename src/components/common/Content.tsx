@@ -40,6 +40,18 @@ const StyledContent = styled.div`
       color: ${theme.colors.text} !important;
       transition: all 0.3s ease-in-out;
     `};
+
+    padding: "5rem",
+    position: "absolute",
+    display: "inline-flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    width: "calc(100vw - 400px)",
+
+    @media all and (min-width: 280px) and (max-width: 1024px) {
+      width: 100%;
+      padding: 0;
+    }
   }
 
   &.content-wrap::-webkit-scrollbar-track {
