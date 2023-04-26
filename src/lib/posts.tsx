@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import moment from "moment";
 
-const postsDirectory = path.join(process.cwd(), 'src/blogposts')
+const postsDirectory = path.join(process.cwd(), "src/blogposts");
 
 export function getPostData() {
   const files = fs.readdirSync(postsDirectory);
@@ -38,14 +38,16 @@ export function generateStaticParams(a: any) {
   return [...paths];
 }
 
-
 export function fetchData(params: any) {
   try {
     var decodeName = decodeURI(decodeURIComponent(params.slug));
     const filePath = path.join(postsDirectory, `${decodeName}.md`);
-    const post = fs.readFileSync(filePath).toString();
+    const post = matter(fs.readFileSync(filePath).toString());
+
+    const { data, content } = post;
+
     return {
-      props: { post },
+      props: { post: content, description: data },
     };
   } catch (err) {
     return {

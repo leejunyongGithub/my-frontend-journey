@@ -12,7 +12,7 @@ export const generateMetadata = async ({ params }: any): Promise<Metadata> => {
 function Post({ params }: any) {
   const data = fetchData(params);
   const { props } = data;
-  const { post } = props;
+  const { post, description } = props;
 
   // 없는 페이지를 호출시 notFound Page로 이동
   if (!post) {
