@@ -1,10 +1,11 @@
+"use client";
 import InputWrapper from "@/components/wrapper/InputWrapper";
 import styled, { css } from "styled-components";
 import { SlMagnifier, SlClose } from "react-icons/sl";
 import { useRef } from "react";
 
 function SearchInput(props: any) {
-  const { value, onChange, clearValue: clear } = props;
+  const { value, onChange, clearValue: clear = () => {} } = props;
   const inputRef = useRef<any>();
 
   const onChangeFocus = () => {
@@ -15,10 +16,10 @@ function SearchInput(props: any) {
     <InputWrapper>
       <StyledInputWrap ref={inputRef} onClick={onChangeFocus}>
         <div className="img-btn">
-          <SlMagnifier size={12}/>
+          <SlMagnifier size={12} />
         </div>
-        <StyledInput placeholder="검색.." value={value} onChange={onChange} />
-        <div className="img-btn">{value.length > 0 && <SlClose onClick={clear} size={15} />}</div>
+        <StyledInput {...props} value={value} onChange={onChange} />
+        <div className="img-btn">{value?.length > 0 && <SlClose onClick={clear} size={15} />}</div>
       </StyledInputWrap>
     </InputWrapper>
   );

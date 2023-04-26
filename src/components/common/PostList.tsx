@@ -39,7 +39,7 @@ function PostList(props: any) {
         <div style={{ marginBottom: "5px" }}>
           글 <span style={{ color: "#978c8c !important" }}>{`(${postData?.length || 0})`}</span>
         </div>
-        <SearchInput value={search} onChange={handleChangeValue} clearValue={clearValue} />
+        <SearchInput value={search} onChange={handleChangeValue} clearValue={clearValue} placeholder="검색.." />
         {categoryList?.map((item: any) => (
           <MenuSelectList
             className="no-scrollbar"

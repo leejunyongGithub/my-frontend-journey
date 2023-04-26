@@ -46,7 +46,6 @@ const StyledContent = styled.div`
     display: inline-flex;
     justify-content: center;
     flex-direction: column;
-    width: calc(100vw - 400px);
 
     @media all and (min-width: 280px) and (max-width: 1024px) {
       width: 100%;
