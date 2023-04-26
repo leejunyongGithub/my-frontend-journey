@@ -1,7 +1,8 @@
 "use client";
 import styled, { css } from "styled-components";
 import React, { useState } from "react";
-import Link from "next/link";
+//import Link from "next/link";
+import { useRouter } from "next/navigation";
 import DropdownWrapper from "./Dropdown";
 import { usePathname } from "next/navigation";
 
@@ -9,6 +10,8 @@ function MenuSelectList({ trigger, options }: any) {
   const pathname = decodeURI(decodeURIComponent(usePathname()).replace("-", " "));
   const isCheck = pathname?.substring(6) ? pathname.substring(6) : "";
   const [selected, change] = useState(isCheck);
+
+  const router = useRouter();
 
   const handleChangeSelected = (item: string) => {
     change(item);
@@ -20,7 +23,7 @@ function MenuSelectList({ trigger, options }: any) {
         <StyledTrigger trigger={trigger} />
         <StyledMenu>
           {options?.map((option: any, index: string | number) => (
-            <Link key={option.slug} href={`/post/${option.slug}`}>
+            <div key={option.slug} onClick={() => router.push(`/post/${option.slug}`)}>
               <StyledItem
                 key={`${option.slug}-${index}`}
                 value={option.frontMatter.title}
@@ -31,7 +34,7 @@ function MenuSelectList({ trigger, options }: any) {
               >
                 <span>{option.frontMatter.title}</span>
               </StyledItem>
-            </Link>
+            </div>
           ))}
         </StyledMenu>
       </DropdownWrapper>
@@ -89,7 +92,7 @@ const StyledItem = styled(DropdownWrapper.Item)`
   &.selected {
     ${({ theme }) => css`
       background: ${theme.colors.listHoverBackground};
-      color: ${theme.colors.listHoverText} !important;
+      color: ${theme.colors.selectedText} !important;
       border-radius: 0.3rem;
       font-weight: 700 !important;
     `};
