@@ -15,6 +15,9 @@ const StyledContent = styled.div`
   overflow-x: hidden;
   position: relative;
 
+  display: inline-flex;
+  justify-content: center;
+
   ${({ theme }) => css`
     background: ${theme.colors.content} !important;
     transition: all 0.3s ease-in-out;

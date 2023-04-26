@@ -1,13 +1,32 @@
-import MarkdownView from "@/components/common/MarkdownView";
 import { notFound } from "next/navigation";
 import { fetchData } from "@/lib/posts";
-import { Metadata } from "next";
+import dynamic from "next/dynamic";
 
-export const generateMetadata = async ({ params }: any): Promise<Metadata> => {
+const MarkdownView = dynamic(() => import("@/components/common/MarkdownView"));
+const PostHeader = dynamic(() => import("@/components/common/PostHeader"), {
+  ssr: false,
+});
+
+export function generateMetadata({ params }: any) {
+  const data = fetchData(params);
+  const { props } = data;
+  const { description } = props;
+
   return {
-    title: decodeURI(decodeURIComponent(params.slug)), // <title>Posts | {slug}</title>
+    title: description?.["title"] || "",
+    description: "",
+    authors: [
+      {
+        name: description?.["author"] || "",
+      },
+    ],
+    keywords: description?.["tags"] || [],
+    openGraph: {
+      title: description?.["title"],
+      description: "여기를 열어보세요.",
+    },
   };
-};
+}
 
 function Post({ params }: any) {
   const data = fetchData(params);
@@ -23,14 +42,16 @@ function Post({ params }: any) {
     <div
       className="markdown-body"
       style={{
-        padding: "64px",
-        width: "100%",
+        padding: "5rem",
         position: "absolute",
         display: "inline-flex",
         justifyContent: "center",
+        flexDirection: "column",
+        width: "calc(100vw - 400px)",
       }}
     >
-      <div id="markdown-view" style={{ maxWidth: "1200px" }}>
+      <PostHeader data={description} />
+      <div id="markdown-view" style={{ maxWidth: "900px" }}>
         <MarkdownView post={post} />
       </div>
     </div>

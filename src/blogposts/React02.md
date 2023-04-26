@@ -6,6 +6,7 @@ category: React
 date: 2019-01-05 18:02:10
 draft: false
 info: false
+author: Jun's
 ---
 # Creating a React App with Create React App
 

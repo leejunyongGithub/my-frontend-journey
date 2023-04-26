@@ -5,6 +5,7 @@ interface Props {
   title?: string;
   author?: string;
   description?: string;
+  tags: Array<any>;
   og?: {
     description?: string;
     type?: string;
@@ -14,10 +15,12 @@ interface Props {
   };
 }
 
-function SEO({ title, author, description, og }: Props) {
+function SEO({ title, author, description, og, tags }: Props) {
+  console.log(tags, "tags");
+  console.log(title, "title");
   return (
     <Head>
-      {title && <title>{title}</title>}
+      {title && <title>{title+"asdadasdasdasdas"}</title>}
       {author && <meta name="author" content={author} />}
       {description && <meta name="description" content={description} />}
       {og?.description && <meta property="og/description" content={og.description} />}

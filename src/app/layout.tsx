@@ -3,10 +3,14 @@ import RootStyleRegistry from "../lib/RootStyleRegistry";
 import Main from "@/components/common/Main";
 import { getPostData } from "@/lib/posts";
 import { notFound } from "next/navigation";
-import { SEO } from "@/components/common/SEO";
 
 export const metadata = {
   title: "준키위키 블로그",
+  description: "고양이와 함께 성장하는 개발자 블로그입니다.",
+  openGraph: {
+    title: "준키위키 블로그",
+    description: "고양이와 함께 성장하는 개발자 블로그입니다.",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -18,7 +22,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <SEO title="head"/>
       <body>
         <RootStyleRegistry>
           <Main postData={postData}>{children}</Main>

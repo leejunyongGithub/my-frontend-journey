@@ -1,9 +1,14 @@
-import { SEO } from "@/components/common/SEO";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: '게시글 목록',
+  description: '게시글 목록 입니다.',
+};
+
 
 function Post() {
   return (
     <>
-      <SEO title="게시글 목록" />
       post
     </>
   );

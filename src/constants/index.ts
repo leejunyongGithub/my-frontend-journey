@@ -18,6 +18,8 @@ export const light = {
     listHoverText: "#8899a8",
     listText: "#8899a8",
     listItem: "#ededed",
+    bedge: "#000",
+    bedgeColor: "#fff",
   },
 };
 
@@ -39,5 +41,7 @@ export const dark = {
     listHoverText: "#fff",
     listText: "#7f7f7f",
     listItem: "#4b4b4b",
+    bedge: "#fff",
+    bedgeColor: "#000",
   },
 };

@@ -3,7 +3,7 @@ import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled, { css } from "styled-components";
 import { VscGithubAlt } from "react-icons/vsc";
-import { SlSocialInstagram, SlHome, SlGrid } from "react-icons/sl";
+import { SlSocialInstagram, SlGrid } from "react-icons/sl";
 import { Tooltip } from "react-tooltip";
 import Link from "next/link";
 import { setItem } from "@/utils";
@@ -45,15 +45,6 @@ function MenuBar() {
         </BarHeader>
       </Link>
       <BarList>
-        <Link href="/introduce">
-          <BarListItem
-            id="introduce"
-            className={selected === "introduce" ? "selected-item" : ""}
-            onClick={() => handleChangeSide("introduce")}
-          >
-            <SlHome size={30} />
-          </BarListItem>
-        </Link>
         <Link href="/post">
           <BarListItem
             id="content"

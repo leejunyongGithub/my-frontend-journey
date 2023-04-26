@@ -44,3 +44,21 @@ export function setItem(key: string, data: object) {
   const parseData = JSON.stringify(data);
   localStorage?.setItem(key, parseData);
 }
+
+export const generateMeta = ({
+  title = "공통 Title",
+  description = "공통 Description",
+  images = ["https://image.com/upload/og.jpg"],
+  og = {},
+}) => {
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images,
+      ...og,
+    },
+  };
+};

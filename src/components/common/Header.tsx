@@ -1,7 +1,7 @@
 import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled, { css } from "styled-components";
-import { SlMouse, SlArrowRight, SlArrowLeft, SlHome, SlGrid, SlSocialInstagram } from "react-icons/sl";
+import { SlMouse, SlArrowRight, SlArrowLeft, SlGrid, SlSocialInstagram } from "react-icons/sl";
 import { VscGithubAlt } from "react-icons/vsc";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import ToggleButton from "./Button/ToggleButton";
@@ -74,11 +74,6 @@ function Header() {
       <Link href="/">
         <MobileButton menu={selected === "logo"} onClick={() => handleChangeSide("logo")}>
           <div className="img-btn" />
-        </MobileButton>
-      </Link>
-      <Link href="/introduce">
-        <MobileButton menu={selected === "home"} onClick={() => handleChangeSide("home")}>
-          <SlHome />
         </MobileButton>
       </Link>
       <Link href="/post">

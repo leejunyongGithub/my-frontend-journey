@@ -6,6 +6,7 @@ category: javascript
 date: 2019-01-05 18:02:10
 draft: false
 info: false
+author: Jun's
 ---
 Understanding JavaScript Closures
 In JavaScript, a closure is created whenever a function is defined inside another function. The inner function has access to the outer function's variables and parameters, even after the outer function has returned. This makes closures a powerful tool for creating modular and flexible code.
