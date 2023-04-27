@@ -2,23 +2,23 @@
 import InputWrapper from "@/components/wrapper/InputWrapper";
 import styled, { css } from "styled-components";
 import { SlMagnifier, SlClose } from "react-icons/sl";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 function SearchInput(props: any) {
-  const { value, onChange, clearValue: clear = () => {} } = props;
+  const { value, onChange, clear = () => {}, placeholder="", style = {} } = props;
   const inputRef = useRef<any>();
 
-  const onChangeFocus = () => {
-    if (inputRef.current) inputRef.current.focus();
-  };
+  useEffect(() => {
+    if (inputRef?.current) inputRef.current.focus();
+  }, []);
 
   return (
     <InputWrapper>
-      <StyledInputWrap ref={inputRef} onClick={onChangeFocus}>
+      <StyledInputWrap>
         <div className="img-btn">
           <SlMagnifier size={12} />
         </div>
-        <StyledInput {...props} value={value} onChange={onChange} />
+        <StyledInput style={...style} value={value} placeholder={placeholder} onChange={onChange} ref={inputRef} />
         <div className="img-btn">{value?.length > 0 && <SlClose onClick={clear} size={15} />}</div>
       </StyledInputWrap>
     </InputWrapper>

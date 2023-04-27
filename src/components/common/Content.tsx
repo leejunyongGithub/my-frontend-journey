@@ -51,6 +51,7 @@ const StyledContent = styled.div`
     flex-direction: column;
     width: 100%;
 
+
     @media all and (min-width: 280px) and (max-width: 1024px) {
       width: 100%;
       padding: 16px;

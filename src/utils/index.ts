@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export function filterCategoryList(list: [], key?: string) {
   const filterData =
     list.filter((item: any, i) => {
@@ -62,3 +64,26 @@ export const generateMeta = ({
     },
   };
 };
+
+export function filterDate(data: any) {
+  let dataList: any = {};
+
+  data.forEach((item: any) => {
+    // item
+    const { frontMatter } = item;
+    const { date } = frontMatter;
+    const parseDate = moment(date).format("YYYY");
+
+    if (dataList?.[parseDate]) {
+      dataList[parseDate].push(item);
+    } else {
+      dataList = {
+        ...dataList,
+        [parseDate]: [],
+      };
+      dataList[parseDate].push(item);
+    }
+  });
+
+  return dataList;
+}

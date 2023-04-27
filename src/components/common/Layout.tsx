@@ -5,17 +5,17 @@ import Header from "./Header";
 import Flex from "./Flex";
 import Content from "./Content";
 import PostList from "./PostList";
-import { Noto_Sans_KR } from "next/font/google";
+//import { Noto_Sans_KR } from "next/font/google";
 import ThemeLayout from "./\bThemeLayout";
 
-const notoSans = Noto_Sans_KR({ weight: "400", subsets: ["latin"] });
+//const notoSans = Noto_Sans_KR({ weight: "400", subsets: ["latin"] });
 
 function Layout(props: any) {
   const { children, posts } = props;
 
   return (
     <ThemeLayout>
-      <StyledLayout className={notoSans.className}>
+      <StyledLayout >
         <Flex>
           <MenuBar />
           <PostList posts={posts} />
