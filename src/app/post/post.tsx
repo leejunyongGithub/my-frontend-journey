@@ -9,7 +9,10 @@ import { useRouter } from "next/navigation";
 function Post(props: any) {
   const router = useRouter();
   const { posts } = props;
+  const resData = filterDate(posts) || {};
+  const { data: filterDateList, category } = resData;
   const [search, change] = useState("");
+  //const [filter, setFilter] = useState(category);
 
   const handleChangeValue = (e: any) => {
     const { value } = e.target;
@@ -19,8 +22,6 @@ function Post(props: any) {
   const clearValue = () => {
     change("");
   };
-
-  const filterDateList = filterDate(posts) || {};
 
   return (
     <PostWrap>
@@ -35,6 +36,11 @@ function Post(props: any) {
         <FilterBedge>
           <span>전체</span>
         </FilterBedge>
+        {category.map((title: string) => (
+          <FilterBedge key={title}>
+            <span>{title}</span>
+          </FilterBedge>
+        ))}
       </PostFilter>
       {Object?.keys(filterDateList).map((item: any) => {
         return (
@@ -104,7 +110,7 @@ const PostFilter = styled.div`
   display: inline-flex;
   display: inline-flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 8px;
 `;
 
 const FilterBedge = styled.div`
@@ -112,11 +118,14 @@ const FilterBedge = styled.div`
   height: 30px;
   background: #666;
   display: inline-flex;
-  padding: 4px;
+  padding: 16px;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
+
+  user-select: none;
+  cursor: pointer;
 
   ${({ theme }) => css`
     background: ${theme.colors.bedge};

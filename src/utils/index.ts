@@ -66,22 +66,29 @@ export const generateMeta = ({
 };
 
 export function filterDate(data: any) {
-  let dataList: any = {};
+  let dataList: any = {
+    data: {},
+    category: [],
+  };
 
   data.forEach((item: any) => {
     // item
     const { frontMatter } = item;
-    const { date } = frontMatter;
+    const { date, category } = frontMatter;
     const parseDate = moment(date).format("YYYY");
 
-    if (dataList?.[parseDate]) {
-      dataList[parseDate].push(item);
+    if (dataList?.["data"]?.[parseDate]) {
+      dataList["data"][parseDate].push(item);
     } else {
-      dataList = {
-        ...dataList,
+      dataList["data"] = {
+        ...dataList["data"],
         [parseDate]: [],
       };
-      dataList[parseDate].push(item);
+      dataList["data"][parseDate].push(item);
+    }
+
+    if (!dataList.category.includes(category)) {
+      dataList.category.push(category);
     }
   });
 
