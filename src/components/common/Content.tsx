@@ -41,11 +41,15 @@ const StyledContent = styled.div`
       transition: all 0.3s ease-in-out;
     `};
 
-    padding: 5rem;
+    padding-top: 5rem;
+    padding-left: 15rem;
+    padding-right: 15rem;
+    padding-bottom: 5rem;
     position: absolute;
     display: inline-flex;
     justify-content: center;
     flex-direction: column;
+    width: 100%;
 
     @media all and (min-width: 280px) and (max-width: 1024px) {
       width: 100%;

@@ -10,7 +10,7 @@ const PostHeader = dynamic(() => import("@/components/common/PostHeader"), {
 export async function generateMetadata({ params }: any) {
   const data = await fetchData(params);
   const { props } = data;
-  const { description } = props;
+  const { description }: any = props;
 
   return {
     title: description?.["title"] || "",
