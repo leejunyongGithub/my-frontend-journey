@@ -1,7 +1,7 @@
 import "./globals.css";
 import RootStyleRegistry from "../lib/RootStyleRegistry";
 import Main from "@/components/common/Main";
-import { getAllPost, getPostData } from "@/lib/posts";
+import { getPostData } from "@/lib/posts";
 import { notFound } from "next/navigation";
 
 export const metadata = {
