@@ -38,7 +38,7 @@ export function generateStaticParams(a: any) {
   return [...paths];
 }
 
-export function fetchData(params: any) {
+export async function fetchData(params: any) {
   try {
     var decodeName = decodeURI(decodeURIComponent(params.slug));
     const filePath = path.join(postsDirectory, `${decodeName}.md`);
@@ -46,8 +46,15 @@ export function fetchData(params: any) {
 
     const { data, content } = post;
 
+    const parseDate = moment(data.date).format("YYYY-MM-DD HH:mm:ss");
+
+    const payload = {
+      ...data,
+      date: parseDate,
+    };
+
     return {
-      props: { post: content, description: data },
+      props: { post: content, description: payload },
     };
   } catch (err) {
     return {

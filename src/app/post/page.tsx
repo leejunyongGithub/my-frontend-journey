@@ -3,7 +3,6 @@ import SearchInput from "@/components/common/Input/SearchInput";
 import styled, { css } from "styled-components";
 
 function Post(props: any) {
-  console.log(props, "props");
   return (
     <PostWrap>
       <SearchInput placeholder="검색할 텍스트를 입력해주세요" style={{ height: "50px", width: "100%" }} />

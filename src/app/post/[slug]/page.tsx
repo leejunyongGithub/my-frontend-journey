@@ -7,8 +7,8 @@ const PostHeader = dynamic(() => import("@/components/common/PostHeader"), {
   ssr: false,
 });
 
-export function generateMetadata({ params }: any) {
-  const data = fetchData(params);
+export async function generateMetadata({ params }: any) {
+  const data = await fetchData(params);
   const { props } = data;
   const { description } = props;
 
@@ -28,8 +28,8 @@ export function generateMetadata({ params }: any) {
   };
 }
 
-function Post({ params }: any) {
-  const data = fetchData(params);
+async function Post({ params }: any) {
+  const data = await fetchData(params);
   const { props } = data;
   const { post, description } = props;
 
@@ -39,9 +39,7 @@ function Post({ params }: any) {
   }
 
   return (
-    <div
-      className="markdown-body"
-    >
+    <div className="markdown-body">
       <PostHeader data={description} />
       <div id="markdown-view" style={{ maxWidth: "900px" }}>
         <MarkdownView post={post} />

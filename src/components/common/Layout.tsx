@@ -11,14 +11,14 @@ import ThemeLayout from "./\bThemeLayout";
 const notoSans = Noto_Sans_KR({ weight: "400", subsets: ["latin"] });
 
 function Layout(props: any) {
-  const { children, postData } = props;
+  const { children, posts } = props;
 
   return (
     <ThemeLayout>
       <StyledLayout className={notoSans.className}>
         <Flex>
           <MenuBar />
-          <PostList postData={postData} />
+          <PostList posts={posts} />
           <Flex mode="column">
             <Header />
             <Content>{children}</Content>

@@ -11,7 +11,7 @@ import SearchInput from "./Input/SearchInput";
 
 function PostList(props: any) {
   const [search, change] = useState<string>("");
-  const { postData } = props;
+  const { posts } = props;
   const option = useRecoilValue(recoilStateOption);
   const { subExpanded, mode } = option;
 
@@ -24,20 +24,20 @@ function PostList(props: any) {
   };
 
   const filterList =
-    postData?.filter((item: any) => {
+  posts?.filter((item: any) => {
       const { frontMatter } = item;
       const { title } = frontMatter;
       return title.toLowerCase().includes(search.toLowerCase());
     }) || [];
 
-  const categoryList = filterCategoryList(postData);
+  const categoryList = filterCategoryList(posts);
   const filterData = filterPostList(filterList);
 
   return (
     <PostListWrap expanded={subExpanded}>
       <ListContent className={subExpanded ? "show" : ""}>
         <div style={{ marginBottom: "5px" }}>
-          글 <span style={{ color: "#978c8c !important" }}>{`(${postData?.length || 0})`}</span>
+          글 <span style={{ color: "#978c8c !important" }}>{`(${posts?.length || 0})`}</span>
         </div>
         <SearchInput value={search} onChange={handleChangeValue} clearValue={clearValue} placeholder="검색.." />
         {categoryList?.map((item: any) => (

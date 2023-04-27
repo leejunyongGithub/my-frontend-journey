@@ -3,11 +3,11 @@ import Layout from "./Layout";
 import { RecoilRoot } from "recoil";
 
 function Main(props: any) {
-  const { children, postData } = props;
+  const { children, posts } = props;
 
   return (
     <RecoilRoot>
-      <Layout postData={postData}>{children}</Layout>
+      <Layout posts={posts}>{children}</Layout>
     </RecoilRoot>
   );
 }

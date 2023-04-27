@@ -1,7 +1,7 @@
 import "./globals.css";
 import RootStyleRegistry from "../lib/RootStyleRegistry";
 import Main from "@/components/common/Main";
-import { getPostData } from "@/lib/posts";
+import { getAllPost, getPostData } from "@/lib/posts";
 import { notFound } from "next/navigation";
 
 export const metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <RootStyleRegistry>
-          <Main postData={postData}>{children}</Main>
+          <Main posts={postData}>{children}</Main>
         </RootStyleRegistry>
       </body>
     </html>
