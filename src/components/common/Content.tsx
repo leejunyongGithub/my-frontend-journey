@@ -11,11 +11,11 @@ const StyledContent = styled.div`
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
-  overflow-x: hidden;
   position: relative;
 
   display: inline-flex;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
 
   ${({ theme }) => css`
     background: ${theme.colors.content} !important;
@@ -44,7 +44,6 @@ const StyledContent = styled.div`
     padding-left: 15rem;
     padding-right: 15rem;
     padding-bottom: 5rem;
-    position: absolute;
     display: inline-flex;
     justify-content: center;
     flex-direction: column;
@@ -53,7 +52,9 @@ const StyledContent = styled.div`
 
     @media all and (min-width: 280px) and (max-width: 1024px) {
       width: 100%;
-      padding: 16px;
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 12px;
       box-sizing: border-box;
     }
   }

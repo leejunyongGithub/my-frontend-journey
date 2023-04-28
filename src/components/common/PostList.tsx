@@ -70,7 +70,6 @@ const PostListWrap = styled.div<{
   box-shadow: rgba(0, 0, 0, 0.024) -1px 0px 0px 0px inset;
   gap: 6px;
   padding: ${(props) => (props.expanded ? "16px" : "0px")};
-  overflow: scroll;
   ::-webkit-scrollbar {
     display: none;
   }
