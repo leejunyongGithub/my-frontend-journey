@@ -63,7 +63,6 @@ const PostListWrap = styled.div<{
   expanded: boolean;
 }>`
   width: ${(props) => (props.expanded ? "250px" : "0px")};
-  height: 100vh;
   display: inline-flex;
   flex-direction: column;
   transition: width 0.5s;

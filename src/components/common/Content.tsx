@@ -9,8 +9,7 @@ export default Content;
 
 const StyledContent = styled.div`
   width: 100%;
-  min-height: calc(100vh - 50px);
-  max-height: 100%;
+  height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
   position: relative;
