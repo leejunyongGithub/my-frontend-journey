@@ -9,7 +9,7 @@ export default Content;
 
 const StyledContent = styled.div`
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 50px);
   overflow-y: scroll;
   position: relative;
 
@@ -48,7 +48,6 @@ const StyledContent = styled.div`
     justify-content: center;
     flex-direction: column;
     width: 100%;
-
 
     @media all and (min-width: 280px) and (max-width: 1024px) {
       width: 100%;
