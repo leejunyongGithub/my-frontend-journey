@@ -2,15 +2,9 @@
 import InputWrapper from "@/components/wrapper/InputWrapper";
 import styled, { css } from "styled-components";
 import { SlMagnifier, SlClose } from "react-icons/sl";
-import { useEffect, useRef } from "react";
 
 function SearchInput(props: any) {
   const { value, onChange, clear = () => {}, placeholder="", style = {} } = props;
-  const inputRef = useRef<any>();
-
-  useEffect(() => {
-    if (inputRef?.current) inputRef.current.focus();
-  }, []);
 
   return (
     <InputWrapper>
@@ -18,7 +12,7 @@ function SearchInput(props: any) {
         <div className="img-btn">
           <SlMagnifier size={12} />
         </div>
-        <StyledInput style={...style} value={value} placeholder={placeholder} onChange={onChange} ref={inputRef} />
+        <StyledInput style={...style} value={value} placeholder={placeholder} onChange={onChange} />
         <div className="img-btn">{value?.length > 0 && <SlClose onClick={clear} size={15} />}</div>
       </StyledInputWrap>
     </InputWrapper>
@@ -60,7 +54,6 @@ const StyledInputWrap = styled.div`
   &: focus {
     outline-width: 1;
   }
-  transition: all 0.3s ease-in-out;
 
   .img-btn {
     width: 30px;
@@ -70,4 +63,6 @@ const StyledInputWrap = styled.div`
     justify-content: center;
     cursor: pointer;
   }
+
+  transition: all 0.3s ease-in-out;
 `;

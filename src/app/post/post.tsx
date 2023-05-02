@@ -1,18 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import SearchInput from "@/components/common/Input/SearchInput";
 import styled, { css } from "styled-components";
 import { filterDate } from "@/utils";
 import moment from "moment";
 import { useRouter } from "next/navigation";
+import { cloneDeep } from "lodash";
 
 function Post(props: any) {
   const router = useRouter();
   const { posts } = props;
   const resData = filterDate(posts) || {};
   const { data: filterDateList, category } = resData;
+  const [filter, setFilter] = useState(category);
   const [search, change] = useState("");
-  //const [filter, setFilter] = useState(category);
 
   const handleChangeValue = (e: any) => {
     const { value } = e.target;
@@ -22,6 +23,43 @@ function Post(props: any) {
   const clearValue = () => {
     change("");
   };
+
+  const handleChangeBedgeItem = (title: string) => {
+    let copyList = cloneDeep(filter);
+    if (title === "전체") {
+      copyList = filter.length === category.length ? [] : category;
+    } else {
+      if (filter.includes(title)) {
+        copyList = copyList.filter((item: string) => item !== title);
+      } else {
+        copyList.push(title);
+      }
+    }
+    setFilter(copyList);
+  };
+
+  const parseFilterList = useCallback(
+    (postList: any) => {
+      return postList?.filter((item: any) => {
+        const { frontMatter } = item;
+        const { title, category: categoryItem } = frontMatter;
+        return filter.length === category.length
+          ? title.toLowerCase().includes(search.toLowerCase())
+          : title.toLowerCase().includes(search.toLowerCase()) && filter.includes(categoryItem);
+      });
+    },
+    [search, filter]
+  );
+
+  const parseListRen = useMemo(() => {
+    return posts?.filter((item: any) => {
+      const { frontMatter } = item;
+      const { title, category: categoryItem } = frontMatter;
+      return filter.length === category.length
+        ? title.toLowerCase().includes(search.toLowerCase())
+        : title.toLowerCase().includes(search.toLowerCase()) && filter.includes(categoryItem);
+    });
+  }, [search, filter]);
 
   return (
     <PostWrap>
@@ -33,36 +71,45 @@ function Post(props: any) {
         clear={clearValue}
       />
       <PostFilter>
-        <FilterBedge>
+        <FilterBedge
+          className={filter.length === category.length ? "selected" : ""}
+          onClick={() => handleChangeBedgeItem("전체")}
+        >
           <span>전체</span>
         </FilterBedge>
         {category.map((title: string) => (
-          <FilterBedge key={title}>
+          <FilterBedge
+            key={title}
+            className={filter?.includes(title) ? "selected" : ""}
+            onClick={() => handleChangeBedgeItem(title)}
+          >
             <span>{title}</span>
           </FilterBedge>
         ))}
       </PostFilter>
-      {Object?.keys(filterDateList).map((item: any) => {
-        return (
-          <PostList key={item}>
-            <PostTitle>{item}</PostTitle>
-            <Line>
-              <div className="line"></div>
-            </Line>
-            {filterDateList[item].map((el: any) => {
-              const { frontMatter, slug } = el;
-              const { date, title } = frontMatter;
-              const parseDate = moment(date).format("MM월DD일");
-              return (
-                <PostItem key={slug} onClick={() => router.push(`/post/${slug}`)}>
-                  <span className="title">{title}</span>
-                  <span className="date">{parseDate}</span>
-                </PostItem>
-              );
-            })}
-          </PostList>
-        );
-      }) || []}
+      {parseListRen.length > 0
+        ? Object?.keys(filterDateList).map((item: any) => {
+            return (
+              <PostList key={item}>
+                <PostTitle>{item}</PostTitle>
+                <Line>
+                  <div className="line"></div>
+                </Line>
+                {parseFilterList(filterDateList[item]).map((el: any) => {
+                  const { frontMatter, slug } = el;
+                  const { date, title } = frontMatter;
+                  const parseDate = moment(date).format("MM월DD일");
+                  return (
+                    <PostItem key={slug} onClick={() => router.push(`/post/${slug}`)}>
+                      <span className="title">{title}</span>
+                      <span className="date">{parseDate}</span>
+                    </PostItem>
+                  );
+                })}
+              </PostList>
+            );
+          }) || []
+        : "검색된 내용이 없습니다 :)"}
     </PostWrap>
   );
 }
@@ -90,6 +137,13 @@ const PostWrap = styled.div`
     padding-right: 15rem;
   }
 
+  @media all and (min-width: 1024px) and (max-width: 1080px) {
+    width: 100%;
+    padding-left: 7rem;
+    padding-right: 7rem;
+    box-sizing: border-box;
+  }
+
   @media all and (min-width: 280px) and (max-width: 1024px) {
     width: 100%;
     padding: 16px;
@@ -113,7 +167,9 @@ const PostFilter = styled.div`
   gap: 8px;
 `;
 
-const FilterBedge = styled.div`
+const FilterBedge = styled.div<{
+  selected?: boolean;
+}>`
   min-width: 50px;
   height: 30px;
   background: #666;
@@ -130,6 +186,11 @@ const FilterBedge = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.bedge};
     color: ${theme.colors.bedgeColor};
+    font-weight: 700;
+
+    &.selected {
+      color: ${theme.colors.selectedBedge};
+    }
   `};
 `;
 

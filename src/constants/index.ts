@@ -20,6 +20,7 @@ export const light = {
     listItem: "#ededed",
     bedge: "#000",
     bedgeColor: "#fff",
+    selectedBedge: "#f53e8c"
   },
 };
 
@@ -43,5 +44,6 @@ export const dark = {
     listItem: "#4b4b4b",
     bedge: "#fff",
     bedgeColor: "#000",
+    selectedBedge: "#55a4f3"
   },
 };
