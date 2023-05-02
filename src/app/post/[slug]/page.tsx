@@ -41,7 +41,7 @@ async function Post({ params }: any) {
   return (
     <div className="markdown-body">
       <PostHeader data={description} />
-      <div id="markdown-view" style={{ maxWidth: "900px" }}>
+      <div id="markdown-view">
         <MarkdownView post={post} />
       </div>
     </div>

@@ -11,6 +11,7 @@ const StyledContent = styled.div`
   width: 100%;
   height: calc(100vh - 50px);
   overflow-y: scroll;
+  overflow-x: hidden;
   position: relative;
 
   display: inline-flex;
@@ -34,28 +35,38 @@ const StyledContent = styled.div`
   }
 
   .markdown-body {
-    ${({ theme }) => css`
-      background: ${theme.colors.content} !important;
-      color: ${theme.colors.text} !important;
-      transition: all 0.3s ease-in-out;
-    `};
-
-    padding-top: 5rem;
-    padding-left: 15rem;
-    padding-right: 15rem;
-    padding-bottom: 5rem;
-    display: inline-flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-
-    @media all and (min-width: 280px) and (max-width: 1024px) {
-      width: 100%;
-      padding-left: 12px;
-      padding-right: 12px;
-      padding-top: 12px;
-      box-sizing: border-box;
+    div {
+      ${({ theme }) => css`
+        background: ${theme.colors.content} !important;
+        color: ${theme.colors.text} !important;
+        transition: all 0.3s ease-in-out;
+      `};
     }
+  }
+
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left: 15rem;
+  padding-right: 15rem;
+
+  display: inline-flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+
+  @media all and (min-width: 1024px) and (max-width: 1200px) {
+    width: 100%;
+    padding-left: 64px;
+    padding-right: 64px;
+    box-sizing: border-box;
+  }
+
+  @media all and (min-width: 280px) and (max-width: 1024px) {
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 12px;
+    box-sizing: border-box;
   }
 
   &.content-wrap::-webkit-scrollbar-track {

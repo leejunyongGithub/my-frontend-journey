@@ -19,4 +19,5 @@ const StyledFlex = styled.div<{
   display: flex;
   flex: 1;
   flex-direction: ${(props) => (props.mode ? props.mode : "row")};
+  width: 100%;
 `;

@@ -25,19 +25,6 @@ export function getPostData() {
   return posts;
 }
 
-export function generateStaticParams(a: any) {
-  const posts = fs.readdirSync(postsDirectory).map((file) => file.split(".")[0]);
-  const paths = posts.map((el) => {
-    return {
-      params: {
-        id: el,
-      },
-    };
-  });
-
-  return [...paths];
-}
-
 export async function fetchData(params: any) {
   try {
     var decodeName = decodeURI(decodeURIComponent(params.slug));
@@ -56,6 +43,22 @@ export async function fetchData(params: any) {
     return {
       props: { post: content, description: payload },
     };
+  } catch (err) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
+}
+
+export async function fetchAbout() {
+  try {
+    const aboutPath = path.join(process.cwd(), "public/");
+    const filePath = path.join(aboutPath, `about.md`);
+    const post = matter(fs.readFileSync(filePath).toString());
+    const { content } = post;
+
+    return  content
   } catch (err) {
     return {
       props: {},

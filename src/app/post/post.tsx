@@ -124,18 +124,9 @@ const PostWrap = styled.div`
     transition: all 0.3s ease-in-out;
   `};
 
-  padding: 5rem;
-  padding-left: 20rem;
-  padding-right: 20rem;
-  position: absolute;
   display: inline-flex;
   flex-direction: column;
   gap: 16px;
-
-  @media all and (min-width: 1024px) and (max-width: 1440px) {
-    padding-left: 15rem;
-    padding-right: 15rem;
-  }
 
   @media all and (min-width: 1024px) and (max-width: 1080px) {
     width: 100%;

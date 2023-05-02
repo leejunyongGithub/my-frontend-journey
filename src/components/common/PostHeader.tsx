@@ -3,7 +3,6 @@ import moment from "moment";
 import styled, { css } from "styled-components";
 import Flex from "./Flex";
 import { NextSeo } from "next-seo";
-import { generateMeta } from "@/utils";
 
 interface Props {
   data: any;
