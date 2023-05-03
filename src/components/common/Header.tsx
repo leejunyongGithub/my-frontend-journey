@@ -128,6 +128,11 @@ const StyledHeader = styled.header`
     border-bottom: 1px solid ${theme.colors.borderBottom};
   `};
   transition: all 0.3s ease-in-out;
+
+  @media all and (max-width: 1024px) {
+    position: fixed;
+    top: 0;
+  }
 `;
 
 const HeaderButton = styled.div`

@@ -47,6 +47,10 @@ const StyledContent = styled.div`
     `};
   }
 
+  @media all and (max-width: 1024px) {
+    margin-top: 50px;
+  }
+
   @media all and (min-width: 1024px) and (max-width: 1200px) {
     width: 100%;
     padding-left: 64px;
