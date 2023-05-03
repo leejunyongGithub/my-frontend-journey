@@ -42,6 +42,6 @@ const StyledLayout = styled.div`
     display: inline-flex;
     flex-direction: column;
     flex: 1;
-    overflow: hidden
+    overflow: hidden;
   }
 `;
