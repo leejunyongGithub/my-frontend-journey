@@ -39,7 +39,7 @@ async function Post({ params }: any) {
   }
 
   return (
-    <div className="markdown-body">
+    <div className="markdown-body-content">
       <PostHeader data={description} />
       <div id="markdown-view">
         <MarkdownView post={post} />

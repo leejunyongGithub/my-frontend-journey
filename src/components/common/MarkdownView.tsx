@@ -4,15 +4,19 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import remarkGfm from "remark-gfm";
-import "github-markdown-css/github-markdown.css";
+import { useRecoilValue } from "recoil";
+import { recoilStateOption } from "@/recoilState/recoilStateOption";
 
 interface MarkdownViewProps {
   post: any;
 }
 
 function MarkdownView({ post }: MarkdownViewProps) {
+  const option = useRecoilValue(recoilStateOption);
+  const { mode = "light" } = option;
+
   return (
-    <div className="markdown-body">
+    <div className={`markdown-body markdown-body-${mode}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
@@ -28,9 +32,6 @@ function MarkdownView({ post }: MarkdownViewProps) {
               </code>
             );
           },
-          blockquote: ({ node, className, ...props }) => (
-            <blockquote className="markdown-body blockquote 11" {...props} />
-          ),
         }}
       >
         {post}

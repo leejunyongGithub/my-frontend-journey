@@ -24,7 +24,7 @@ function PostList(props: any) {
   };
 
   const filterList =
-  posts?.filter((item: any) => {
+    posts?.filter((item: any) => {
       const { frontMatter } = item;
       const { title } = frontMatter;
       return title.toLowerCase().includes(search.toLowerCase());
@@ -65,7 +65,6 @@ const PostListWrap = styled.div<{
   width: ${(props) => (props.expanded ? "250px" : "0px")};
   display: inline-flex;
   flex-direction: column;
-  transition: width 0.5s;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.024) -1px 0px 0px 0px inset;
   gap: 6px;
@@ -83,6 +82,7 @@ const PostListWrap = styled.div<{
     color: ${theme.colors.color};
     border-right: 1px solid ${theme.colors.borderBottom};
   `};
+  
   transition: all 0.3s ease-in-out;
 `;
 

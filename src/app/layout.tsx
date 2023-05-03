@@ -1,5 +1,4 @@
 import "./globals.css";
-import "./markdown.css";
 import RootStyleRegistry from "../lib/RootStyleRegistry";
 import Main from "@/components/common/Main";
 import { getPostData } from "@/lib/posts";

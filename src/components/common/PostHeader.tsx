@@ -18,11 +18,11 @@ function PostHeader({ data }: Props) {
       <PostHeaderWrap>
         <HeaderTitle>{title}</HeaderTitle>
         <HeaderItem>
-          <Flex>
+          <div style={{ display: "inline-flex" }}>
             {tags.map((item: any, index: number) => (
               <Tag key={index}>{`#${item}`}</Tag>
             ))}
-          </Flex>
+          </div>
         </HeaderItem>
         <HeaderItem>Written by {author}</HeaderItem>
         <HeaderItem>{parseDate}</HeaderItem>

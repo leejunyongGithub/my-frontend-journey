@@ -2,7 +2,6 @@
 import styled from "styled-components";
 import MenuBar from "./MenuBar";
 import Header from "./Header";
-import Flex from "./Flex";
 import Content from "./Content";
 import PostList from "./PostList";
 //import { Noto_Sans_KR } from "next/font/google";
@@ -15,15 +14,19 @@ function Layout(props: any) {
 
   return (
     <ThemeLayout>
-      <StyledLayout >
-        <Flex>
+      <StyledLayout>
+        <div
+          style={{
+            display: "flex",
+          }}
+        >
           <MenuBar />
           <PostList posts={posts} />
-          <Flex mode="column">
+          <div className="flex-layout">
             <Header />
             <Content>{children}</Content>
-          </Flex>
-        </Flex>
+          </div>
+        </div>
       </StyledLayout>
     </ThemeLayout>
   );
@@ -34,5 +37,11 @@ export default Layout;
 const StyledLayout = styled.div`
   width: 100%;
   height: 100%;
-  position: relative;
+
+  .flex-layout {
+    display: inline-flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden
+  }
 `;
