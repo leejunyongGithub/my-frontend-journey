@@ -136,9 +136,9 @@ const StyledHeader = styled.header<{
 
   padding-left: ${(props) => (props.scroll > 1 ? "25px" : "15rem")};
   padding-right: ${(props) => (props.scroll > 1 ? "25px" : "15rem")};
+  border-bottom: ${(props) => (props.scroll > 1 ? "none" : "1px solid #ededed")};
 
   @media all and (min-width: 280px) and (max-width: 1024px) {
-    border-bottom: ${(props) => (props.scroll > 1 ? "none" : "1px solid #ededed")};
     width: ${(props) => (props.scroll > 1 ? "90%" : "100%")};
   }
 
