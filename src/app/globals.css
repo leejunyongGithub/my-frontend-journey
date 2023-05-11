@@ -92,7 +92,6 @@ body {
 }
 .page.entering,
 .page.entered {
-  position: relative;
   opacity: 1;
 }
 .page.exiting,
@@ -119,10 +118,6 @@ body {
 .scroll-progress-gauage {
   height: 100%;
   background-color: rgb(187, 245, 160);
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
 }
 
 a {
