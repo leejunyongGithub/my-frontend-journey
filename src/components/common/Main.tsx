@@ -1,13 +1,20 @@
 "use client";
+import { useEffect } from "react";
 import Layout from "./Layout";
 import { RecoilRoot } from "recoil";
 
 function Main(props: any) {
-  const { children, posts,directoryList } = props;
+  const { children, posts, directoryList } = props;
+
+  useEffect(() => {
+    console.log("%c준키위키 블로그", `color:#3d5afe; font-size: 4rem; font-weight: bold`);
+  }, []);
 
   return (
     <RecoilRoot>
-      <Layout posts={posts} directoryList={directoryList}>{children}</Layout>
+      <Layout posts={posts} directoryList={directoryList}>
+        {children}
+      </Layout>
     </RecoilRoot>
   );
 }

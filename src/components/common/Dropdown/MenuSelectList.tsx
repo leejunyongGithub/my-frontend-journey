@@ -26,7 +26,7 @@ function MenuSelectList({ trigger, options }: any) {
             <div
               key={option.slug}
               onClick={() =>
-                router.push(`/post/${option.slug}`)
+                router.push(`/posts/${option.slug}`)
               }
             >
               <StyledItem

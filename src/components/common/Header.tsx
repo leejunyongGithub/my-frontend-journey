@@ -72,15 +72,16 @@ function Header() {
     };
   }, [handleScroll]);
 
+
   return (
-    <StyledHeader scroll={window.scrollY}>
+    <StyledHeader scroll={global?.scrollY || 0}>
       <div style={{ display: "inline-flex", height: "100%" }}>
         <Link href="/">
           <MobileButton menu={selected === "logo"} onClick={() => handleChangeSide("logo")}>
             <div className="img-btn" />
           </MobileButton>
         </Link>
-        <Link href="/post">
+        <Link href="/posts">
           <MobileButton menu={selected === "post"} onClick={() => handleChangeSide("post")}>
             <CiViewList size={40} />
           </MobileButton>
@@ -103,7 +104,7 @@ function Header() {
         <ToggleButton width={40} height={20} toggle={mode === "light" ? false : true} onClick={handleChangeToggle} />
         <HiOutlineMoon size={20} />
       </HeaderToggleButton>
-      {window.scrollY > 1 && pathname.includes("post/") && (
+      {global?.scrollY > 1 && pathname.includes("post/") && (
         <div className="scroll-progress" ref={progressRef}>
           <div className="scroll-progress-gauage" style={{ width: width + "%" }}></div>
         </div>

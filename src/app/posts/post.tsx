@@ -23,7 +23,7 @@ function Post(props: any) {
                   <PostCard
                     key={item.slug}
                     onClick={() =>
-                      router.push(`/post/${item.frontMatter.category}/${item.frontMatter.title}/${item.slug}`)
+                      router.push(`/posts/${item.frontMatter.category}/${item.slug}`)
                     }
                   >
                     <CardThumbnail />

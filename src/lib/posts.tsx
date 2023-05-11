@@ -70,9 +70,15 @@ export function getFileInfo(fileName: string, path: string) {
 
 export async function fetchData(params: any) {
   try {
-    let decodeName = decodeURI(decodeURIComponent(params.slug));
-    const filePath = path.join(`${testPath}/React/${decodeName}`, `index.md`);
+    let parsePath = '';
+    params.slug.forEach((item:string) => {
+      parsePath += `${item}/`
+    })
+
+    let decodeName = decodeURI(decodeURIComponent(parsePath));
+    const filePath = path.join(`${testPath}/${decodeName}`, `index.md`);
     const post = matter(fs.readFileSync(filePath).toString());
+
     const { data, content } = post;
     const parseDate = moment(data.date).format("YYYY-MM-DD HH:mm:ss");
 

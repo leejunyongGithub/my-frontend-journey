@@ -45,11 +45,11 @@ function MenuBar() {
         </BarHeader>
       </Link>
       <BarList>
-        <Link href="/post">
+        <Link href="/posts">
           <BarListItem
             id="content"
             className={selected === "post" ? "selected-item" : ""}
-            onClick={() => handleChangeSide("post")}
+            onClick={() => handleChangeSide("posts")}
           >
             <SlGrid size={30} />
           </BarListItem>

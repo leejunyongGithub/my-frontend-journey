@@ -3,11 +3,7 @@ import styled from "styled-components";
 import Content from "./Content";
 import Footer from "./Footer";
 import ThemeLayout from "./\bThemeLayout";
-import dynamic from "next/dynamic";
-
-const Header = dynamic(() => import("./Header"), {
-  ssr: false,
-});
+import Header from "./Header";
 
 function Layout(props: any) {
   const { children, posts, directoryList } = props;
