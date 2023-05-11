@@ -29,11 +29,6 @@ const StyledContent = styled.div`
   justify-content: flex-start;
   flex-direction: column;
 
-  @media all and (max-width: 1024px) {
-    position: absolute;
-    top: 50px;
-  }
-
   @media all and (min-width: 1024px) and (max-width: 1200px) {
     width: 100%;
     padding-left: 64px;
