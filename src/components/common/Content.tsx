@@ -1,21 +1,24 @@
-import { ReactNode, useEffect } from "react";
-import styled, { css } from "styled-components";
-import { usePathname } from "next/navigation";
-import { Transition, TransitionGroup } from "react-transition-group";
+import { ReactNode } from "react";
+import styled from "styled-components";
+//import { usePathname } from "next/navigation";
+//import { Transition, TransitionGroup } from "react-transition-group";
 
 function Content({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
+  //const pathname = usePathname();
 
   return (
-    <TransitionGroup component={null}>
-      <Transition key={pathname} timeout={{ enter: 500, exit: 500 }}>
-        {(status) => (
-          <StyledContent id="main-content" className={`content-wrap page ${status}`}>
-            {children}
-          </StyledContent>
-        )}
-      </Transition>
-    </TransitionGroup>
+    // <TransitionGroup component={null}>
+    //   <Transition key={pathname} timeout={{ enter: 500, exit: 500 }}>
+    //     {(status) => (
+    //       <StyledContent id="main-content" className={`content-wrap page ${status}`}>
+    //         {children}
+    //       </StyledContent>
+    //     )}
+    //   </Transition>
+    // </TransitionGroup>
+    <StyledContent id="main-content" className={`content-wrap page ${status}`}>
+      {children}
+    </StyledContent>
   );
 }
 
