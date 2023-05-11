@@ -30,7 +30,7 @@ export default Footer;
 
 const FooterWrap = styled.footer`
   width: 100%;
-  height: 150px;
+  height: 100px;
   border-top: 1px solid #ededed;
   background: #fff;
   box-sizing: border-box;

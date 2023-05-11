@@ -7,7 +7,6 @@ import DropdownWrapper from "./Dropdown";
 import { usePathname } from "next/navigation";
 
 function MenuSelectList({ trigger, options }: any) {
-  console.log(options, "options");
   const pathname = decodeURI(decodeURIComponent(usePathname()).replace("-", " "));
   const isCheck = pathname?.substring(6) ? pathname.substring(6) : "";
   const [selected, change] = useState(isCheck);

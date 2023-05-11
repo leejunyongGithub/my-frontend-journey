@@ -1,13 +1,13 @@
 "use client";
 import styled from "styled-components";
-//import MenuBar from "./MenuBar";
-import Header from "./Header";
 import Content from "./Content";
-//import PostList from "./PostList";
-import ThemeLayout from "./\bThemeLayout";
 import Footer from "./Footer";
+import ThemeLayout from "./\bThemeLayout";
+import dynamic from "next/dynamic";
 
-//const notoSans = Noto_Sans_KR({ weight: "400", subsets: ["latin"] });
+const Header = dynamic(() => import("./Header"), {
+  ssr: false,
+});
 
 function Layout(props: any) {
   const { children, posts, directoryList } = props;
@@ -15,14 +15,9 @@ function Layout(props: any) {
   return (
     <ThemeLayout>
       <StyledLayout id="content-body">
-        {/* <MenuBar /> */}
-        {/* <PostList posts={posts} directoryList={directoryList} /> */}
-        {/* <div className="flex-layout"> */}
         <Header />
-        {/* <ScrollProgressBar /> */}
         <Content>{children}</Content>
         <Footer />
-        {/* </div> */}
       </StyledLayout>
     </ThemeLayout>
   );

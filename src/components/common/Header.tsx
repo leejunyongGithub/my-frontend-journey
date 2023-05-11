@@ -1,6 +1,6 @@
 import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import ToggleButton from "./Button/ToggleButton";
 import { LAYOUT_KEY } from "@/constants";
@@ -8,8 +8,10 @@ import { setItem } from "@/utils";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CiViewList } from "react-icons/ci";
+import { usePathname } from "next/navigation";
 
 function Header() {
+  const pathname = usePathname();
   const [width, setWidth] = useState<number>(0);
   // 스크롤 진행도에 따른 width 상태 관리
   const progressRef = useRef<HTMLDivElement | null>(null);
@@ -72,7 +74,7 @@ function Header() {
 
   return (
     <StyledHeader scroll={window.scrollY}>
-      <div style={{ display: "inline-flex", height: "40px", gap: "16px" }}>
+      <div style={{ display: "inline-flex", height: "100%" }}>
         <Link href="/">
           <MobileButton menu={selected === "logo"} onClick={() => handleChangeSide("logo")}>
             <div className="img-btn" />
@@ -101,7 +103,7 @@ function Header() {
         <ToggleButton width={40} height={20} toggle={mode === "light" ? false : true} onClick={handleChangeToggle} />
         <HiOutlineMoon size={20} />
       </HeaderToggleButton>
-      {window.scrollY > 1 && (
+      {window.scrollY > 1 && pathname.includes("post/") && (
         <div className="scroll-progress" ref={progressRef}>
           <div className="scroll-progress-gauage" style={{ width: width + "%" }}></div>
         </div>
@@ -160,8 +162,8 @@ const StyledHeader = styled.header<{
 const MobileButton = styled.div<{
   menu: boolean;
 }>`
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 100%;
   align-items: center;
   justify-content: center;
   user-select: none;
@@ -185,6 +187,10 @@ const MobileButton = styled.div<{
 
   @media all and (min-width: 280px) and (max-width: 512px){
     width: 50px;
+  }
+
+  &: hover {
+    background: #ededed;
   }
 }
 `;

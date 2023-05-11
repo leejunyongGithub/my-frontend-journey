@@ -70,20 +70,15 @@ export function getFileInfo(fileName: string, path: string) {
 
 export async function fetchData(params: any) {
   try {
-    console.log(params, "params")
-    var decodeName = decodeURI(decodeURIComponent(params.slug));
+    let decodeName = decodeURI(decodeURIComponent(params.slug));
     const filePath = path.join(`${testPath}/React/${decodeName}`, `index.md`);
-    console.log(filePath, "filePath")
     const post = matter(fs.readFileSync(filePath).toString());
-
     const { data, content } = post;
-
     const parseDate = moment(data.date).format("YYYY-MM-DD HH:mm:ss");
 
     const payload = {
       ...data,
       date: parseDate,
-      abc: "test"
     };
 
     return {
@@ -97,18 +92,11 @@ export async function fetchData(params: any) {
   }
 }
 
-export async function fetchAbout() {
-  try {
-    const aboutPath = path.join(process.cwd(), "public/");
-    const filePath = path.join(aboutPath, `about.md`);
-    const post = matter(fs.readFileSync(filePath).toString());
-    const { content } = post;
+export function fetchAbout() {
+  const aboutPath = path.join(process.cwd(), "public/");
+  const filePath = path.join(aboutPath, `about.md`);
+  const post = matter(fs.readFileSync(filePath).toString());
+  const { content } = post;
 
-    return content;
-  } catch (err) {
-    return {
-      props: {},
-      notFound: true,
-    };
-  }
+  return content;
 }

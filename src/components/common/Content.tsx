@@ -1,22 +1,9 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-//import { usePathname } from "next/navigation";
-//import { Transition, TransitionGroup } from "react-transition-group";
 
 function Content({ children }: { children: ReactNode }) {
-  //const pathname = usePathname();
-
   return (
-    // <TransitionGroup component={null}>
-    //   <Transition key={pathname} timeout={{ enter: 500, exit: 500 }}>
-    //     {(status) => (
-    //       <StyledContent id="main-content" className={`content-wrap page ${status}`}>
-    //         {children}
-    //       </StyledContent>
-    //     )}
-    //   </Transition>
-    // </TransitionGroup>
-    <StyledContent id="main-content" className={`content-wrap page ${status}`}>
+    <StyledContent id="main-content" className={`content-wrap`}>
       {children}
     </StyledContent>
   );
@@ -30,6 +17,8 @@ const StyledContent = styled.div`
   background: #fff;
 
   margin-top: 50px;
+
+  min-height: calc(100vh - 60px - 100px);
 
   padding-top: 100px;
   padding-bottom: 50px;

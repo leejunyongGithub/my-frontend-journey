@@ -1,7 +1,7 @@
 import { fetchAbout } from "@/lib/posts";
-import MainComponent from "./main";
+import MarkdownView from "@/components/common/MarkdownView";
 
-export default async function Home() {
-  const about = await fetchAbout();
-  return <MainComponent about={about} />;
+export default function Home() {
+  const about = fetchAbout();
+  return <MarkdownView post={about} />;
 }

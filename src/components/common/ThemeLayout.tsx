@@ -8,13 +8,8 @@ import { LAYOUT_KEY, dark, light } from "@/constants";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 
-const Loadings = dynamic(() => import("../Loading"), {
-  ssr: false,
-});
-
 function ThemeLayout(props: any) {
   const { children } = props;
-  const [loading, setLoading] = useState(true);
   const [option, setOption] = useRecoilState(recoilStateOption);
   const { mode } = option;
   const path = usePathname();
@@ -55,12 +50,9 @@ function ThemeLayout(props: any) {
         setOption(data);
       }
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
   }, []);
 
-  return <ThemeProvider theme={mode === "dark" ? dark : light}>{loading ? <Loadings /> : children}</ThemeProvider>;
+  return <ThemeProvider theme={true ? dark : light}>{children}</ThemeProvider>;
 }
 
 export default ThemeLayout;

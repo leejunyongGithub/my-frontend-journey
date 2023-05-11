@@ -1,115 +1,54 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import SearchInput from "@/components/common/Input/SearchInput";
 import styled, { css } from "styled-components";
 import { filterDate } from "@/utils";
 import moment from "moment";
 import { useRouter } from "next/navigation";
-import { cloneDeep } from "lodash";
 
 function Post(props: any) {
-  const router = useRouter();
   const { posts } = props;
-  const resData = filterDate(posts) || {};
-  const { data: filterDateList, category } = resData;
-  const [filter, setFilter] = useState(category);
-  const [search, change] = useState("");
-
-  const handleChangeValue = (e: any) => {
-    const { value } = e.target;
-    change(value);
-  };
-
-  const clearValue = () => {
-    change("");
-  };
-
-  const handleChangeBedgeItem = (title: string) => {
-    let copyList = cloneDeep(filter);
-    if (title === "전체") {
-      copyList = filter.length === category.length ? [] : category;
-    } else {
-      if (filter.includes(title)) {
-        copyList = copyList.filter((item: string) => item !== title);
-      } else {
-        copyList.push(title);
-      }
-    }
-    setFilter(copyList);
-  };
-
-  const parseFilterList = useCallback(
-    (postList: any) => {
-      return postList?.filter((item: any) => {
-        const { frontMatter } = item;
-        const { title, category: categoryItem } = frontMatter;
-        return filter.length === category.length
-          ? title.toLowerCase().includes(search.toLowerCase())
-          : title.toLowerCase().includes(search.toLowerCase()) && filter.includes(categoryItem);
-      });
-    },
-    [search, filter]
-  );
-
-  const parseListRen = useMemo(() => {
-    return posts?.filter((item: any) => {
-      const { frontMatter } = item;
-      const { title, category: categoryItem } = frontMatter;
-      return filter.length === category.length
-        ? title.toLowerCase().includes(search.toLowerCase())
-        : title.toLowerCase().includes(search.toLowerCase()) && filter.includes(categoryItem);
-    });
-  }, [search, filter]);
+  const router = useRouter();
+  const category = Object.keys(posts) || [];
 
   return (
     <PostWrap>
-      <SearchInput
-        placeholder="검색할 텍스트를 입력해주세요"
-        style={{ height: "40px", width: "100%" }}
-        value={search}
-        onChange={handleChangeValue}
-        clear={clearValue}
-      />
-      <PostFilter>
-        <FilterBedge
-          className={filter.length === category.length ? "selected" : ""}
-          onClick={() => handleChangeBedgeItem("전체")}
-        >
-          <span>전체</span>
-        </FilterBedge>
-        {category.map((title: string) => (
-          <FilterBedge
-            key={title}
-            className={filter?.includes(title) ? "selected" : ""}
-            onClick={() => handleChangeBedgeItem(title)}
-          >
-            <span>{title}</span>
-          </FilterBedge>
-        ))}
-      </PostFilter>
-      {parseListRen.length > 0
-        ? Object?.keys(filterDateList).map((item: any) => {
-            return (
-              <PostList key={item}>
-                <PostTitle>{item}</PostTitle>
-                <Line>
-                  <div className="line"></div>
-                </Line>
-                {parseFilterList(filterDateList[item]).map((el: any) => {
-                  const { frontMatter, slug } = el;
-                  const { date, title } = frontMatter;
-                  const parseDate = moment(date).format("MM월DD일");
-                  return (
-                    <PostItem key={slug} onClick={() => router.push(`/post/${slug}`)}>
-                      <span className="title">{title}</span>
-                      <span className="date">{parseDate}</span>
-                    </PostItem>
-                  );
-                })}
-              </PostList>
-            );
-          }) || []
-        : "검색된 내용이 없습니다 :)"}
+      {category.map(
+        (title) =>
+          posts?.[title]?.length > 0 && (
+            <React.Fragment key={title}>
+              <PostTitle>{title}</PostTitle>
+              <GridWrap>
+                {posts?.[title].map((item: any) => (
+                  <PostCard
+                    key={item.slug}
+                    onClick={() =>
+                      router.push(`/post/${item.frontMatter.category}/${item.frontMatter.title}/${item.slug}`)
+                    }
+                  >
+                    <CardThumbnail />
+                    <CardKeyword>
+                      <PostFilter>
+                        {item?.frontMatter?.tags?.length > 0 &&
+                          item.frontMatter?.tags.map((tag: string) => (
+                            <FilterBedge key={`${title}-${tag}`}>{tag}</FilterBedge>
+                          ))}
+                      </PostFilter>
+                    </CardKeyword>
+                    <CardTitle>{item?.frontMatter.title || ""}</CardTitle>
+                    <CardDescription>
+                      <span>설명란 입니다asdasdasdasdasdasdasdasdasd.</span>
+                    </CardDescription>
+                    <CardDate>{moment(item?.frontMatter.date || "").format("YYYY년 MM월 DD일")}</CardDate>
+                    <CardWriter>
+                      <span>{item?.frontMatter.author || ""}</span>
+                    </CardWriter>
+                  </PostCard>
+                ))}
+              </GridWrap>
+            </React.Fragment>
+          )
+      )}
     </PostWrap>
   );
 }
@@ -118,11 +57,6 @@ export default Post;
 
 const PostWrap = styled.div`
   width: 100%;
-  ${({ theme }) => css`
-    background: ${theme.colors.content} !important;
-    color: ${theme.colors.text} !important;
-    transition: all 0.3s ease-in-out;
-  `};
 
   display: inline-flex;
   flex-direction: column;
@@ -142,6 +76,18 @@ const PostWrap = styled.div`
   }
 `;
 
+const GridWrap = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+  column-gap: 20px;
+  row-gap: 20px;
+  padding: 16px;
+  box-sizing: border-box;
+`;
+
 const PostTitle = styled.div`
   font-size: 3rem;
   font-weight: 700;
@@ -153,7 +99,7 @@ const PostFilter = styled.div`
   width: 100%;
   min-height: 50px;
   display: inline-flex;
-  display: inline-flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 4px;
 `;
@@ -178,7 +124,7 @@ const FilterBedge = styled.div<{
   ${({ theme }) => css`
     background: ${theme.colors.bedge};
     color: #000;
-    
+
     &.selected {
       color: #fff;
       background: ${theme.colors.selectedBedge};
@@ -186,53 +132,65 @@ const FilterBedge = styled.div<{
   `};
 `;
 
-const PostList = styled.div`
+const PostCard = styled.div`
+  width: 100%;
+  min-heihgt: 450px;
   display: inline-flex;
   flex-direction: column;
-  gap: 8px;
-`;
-
-const PostItem = styled.div`
-  height: 50px;
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-
-  ${({ theme }) => css`
-    color: ${theme.colors.selectedText} !important;
-  `};
-
-  padding: 16px;
-
-  border-radius: 0.5rem;
-
+  border-radius: 0.2rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  overflow: hidden;
+  transition: all 0.3s ease-out;
   &: hover {
-    ${({ theme }) => css`
-      background: ${theme.colors.listHoverBackground} !important;
-      color: ${theme.colors.text} !important;
-      transition: all 0.3s ease-in-out;
-    `};
-  }
-
-  .title {
-    font-weight: 700;
-  }
-
-  .date {
-    font-weight: 400;
+    transform: translateY(-5px) scale(1.005) translateZ(0);
   }
 `;
 
-const Line = styled.div`
+const CardTitle = styled.div`
+  height: 50px;
+  font-weight: 700;
+  color: #666;
+  padding: 16px;
+  box-sizing: border-box;
+`;
+
+const CardThumbnail = styled.div`
   width: 100%;
-  height: 1px;
-  .line {
-    ${({ theme }) => css`
-      background: ${theme.colors.listText} !important;
-    `};
-    height: 1px;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
+  height: 200px;
+  background: gray;
 `;
+
+const CardDescription = styled.div`
+  height: 50px;
+  text-overflow: ellipsis;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+`;
+
+const CardDate = styled.div`
+  height: 50px;
+  padding: 16px;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: #5d5d5d;
+`;
+
+const CardKeyword = styled.div`
+  min-height: 50px;
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 5px;
+  box-sizing: border-box;
+`;
+
+const CardWriter = styled.div`
+  height: 50px;
+  font-weight: 700;
+  border-top: 1px solid #ededed;
+  padding: 16px;
+  box-sizing: border-box;
+`;
+
+const SkeletonCard = styled.div``;
