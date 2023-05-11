@@ -1,57 +1,31 @@
 import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled, { css } from "styled-components";
-import { SlMouse, SlArrowRight, SlArrowLeft, SlGrid, SlSocialInstagram } from "react-icons/sl";
-import { VscGithubAlt } from "react-icons/vsc";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import ToggleButton from "./Button/ToggleButton";
 import { LAYOUT_KEY } from "@/constants";
 import { setItem } from "@/utils";
 import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { CiViewList } from "react-icons/ci";
 
 function Header() {
+  const [width, setWidth] = useState<number>(0);
+  // 스크롤 진행도에 따른 width 상태 관리
+  const progressRef = useRef<HTMLDivElement | null>(null);
   const [option, setOption] = useRecoilState(recoilStateOption);
-
-  const { expanded, menu: selected, subExpanded, mode } = option;
-
-  const handleChangeMenuBar = () => {
-    setItem(LAYOUT_KEY, {
-      ...option,
-      expanded: !option.expanded,
-    });
-    setOption({
-      ...option,
-      expanded: !option.expanded,
-    });
-  };
+  const { menu: selected, mode } = option;
 
   const handleChangeSide = (menu: string) => {
     if (menu === selected) return;
 
-    let payload = {};
-    if (menu === "post") payload = { subExpanded: true };
-    if (menu !== "post" && subExpanded) payload = { subExpanded: false };
-
     setItem(LAYOUT_KEY, {
       ...option,
       expanded: menu,
-      ...payload,
     });
     setOption({
       ...option,
       menu: menu,
-      ...payload,
-    });
-  };
-
-  const handleChangeSubBar = () => {
-    setItem(LAYOUT_KEY, {
-      ...option,
-      subExpanded: !option.subExpanded,
-    });
-    setOption({
-      ...option,
-      subExpanded: !option.subExpanded,
     });
   };
 
@@ -69,9 +43,36 @@ function Header() {
     });
   };
 
+  const handleScroll = useCallback((): void => {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+    if (scrollTop === 0) {
+      // 스크롤바가 가장 위에있을때는 0으로 처리
+      setWidth(0);
+      return;
+    }
+
+    const windowHeight: number = scrollHeight - clientHeight;
+    // 스크롤바 크기 = (내용 전체의 높이) - (스크롤바를 제외한 클라이언트 높이)
+
+    const currentPercent: number = scrollTop / windowHeight;
+    // 스크롤바 크기 기준으로 scrollTop이 내려온만큼에 따라 계산 (계산시 소수점 둘째자리까지 반환)
+
+    setWidth(currentPercent * 100);
+    // 소수점 둘째자리 까지이므로, 100을 곱하여 정수로 만들어줍니다.
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, true);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll, true);
+    };
+  }, [handleScroll]);
+
   return (
-    <StyledHeader>
-      <div style={{ paddingLeft: "8px", display: "inline-flex", gap: "8px" }}>
+    <StyledHeader scroll={window.scrollY}>
+      <div style={{ display: "inline-flex", height: "40px", gap: "16px" }}>
         <Link href="/">
           <MobileButton menu={selected === "logo"} onClick={() => handleChangeSide("logo")}>
             <div className="img-btn" />
@@ -79,88 +80,93 @@ function Header() {
         </Link>
         <Link href="/post">
           <MobileButton menu={selected === "post"} onClick={() => handleChangeSide("post")}>
-            <SlGrid />
+            <CiViewList size={40} />
           </MobileButton>
         </Link>
       </div>
-      <HeaderButton onClick={handleChangeMenuBar}>
-        {expanded ? <SlArrowLeft size={20} /> : <SlArrowRight size={20} />}
-      </HeaderButton>
-      {selected === "post" && (
-        <HeaderButton onClick={handleChangeSubBar}>
-          <>{subExpanded ? <SlMouse size={25} /> : <SlMouse size={25} color="red" />}</>
-        </HeaderButton>
-      )}
       <HeaderToggleButton>
-        <div>
+        {/* <div>
           <a href="https://www.instagram.com/kiwipodo/" target="_blank">
             <MobileButton menu={selected === "instagram"} onClick={() => handleChangeSide("instagram")}>
-              <SlSocialInstagram />
+              <SlSocialInstagram size={20} />
             </MobileButton>
           </a>
           <a href="https://github.com/leejunyongGithub/" target="_blank">
             <MobileButton menu={selected === "github"} onClick={() => handleChangeSide("github")}>
-              <VscGithubAlt />
+              <VscGithubAlt size={20} />
             </MobileButton>
           </a>
-        </div>
+        </div> */}
         <HiOutlineSun size={20} />
         <ToggleButton width={40} height={20} toggle={mode === "light" ? false : true} onClick={handleChangeToggle} />
         <HiOutlineMoon size={20} />
       </HeaderToggleButton>
+      {window.scrollY > 1 && (
+        <div className="scroll-progress" ref={progressRef}>
+          <div className="scroll-progress-gauage" style={{ width: width + "%" }}></div>
+        </div>
+      )}
     </StyledHeader>
   );
 }
 
 export default Header;
 
-const StyledHeader = styled.header`
-  width: 100%;
+const StyledHeader = styled.header<{
+  scroll: number;
+}>`
+  overflow: hidden;
+  width: ${(props) => (props.scroll > 1 ? "80%" : "100%")};
+  border-radius: ${(props) => (props.scroll > 1 ? "2rem" : "0")};
+  text-align: center;
   height: 50px;
-  background: #ededed;
-  position: relative;
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
   display: inline-flex;
+  justify-content: space-between;
   align-items: center;
-  padding-right: 16px;
-  ${({ theme }) => css`
-    background: ${theme.colors.background};
-    color: ${theme.colors.color};
-    border-bottom: 1px solid ${theme.colors.borderBottom};
-  `};
   transition: all 0.3s ease-in-out;
+  z-index: 999;
+  background: #fff;
+  margin-top: ${(props) => (props.scroll > 1 ? "10px" : "0px")};
+  box-shadow: ${(props) =>
+    props.scroll > 1 ? "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px" : "none"};
 
-  @media all and (max-width: 1024px) {
-    position: fixed;
-    top: 0;
+  padding-left: ${(props) => (props.scroll > 1 ? "25px" : "15rem")};
+  padding-right: ${(props) => (props.scroll > 1 ? "25px" : "15rem")};
+
+  @media all and (min-width: 280px) and (max-width: 1024px) {
+    transition: all 0.3s ease-in-out;
+    border-bottom: ${(props) => (props.scroll > 1 ? "none" : "1px solid #ededed")};
+    width: ${(props) => (props.scroll > 1 ? "90%" : "100%")};
   }
-`;
 
-const HeaderButton = styled.div`
-  width: 50px;
-  height: 50px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  cursor: pointer;
+  @media all and (min-width: 1024px) and (max-width: 1200px) {
+    padding-left: 64px;
+    padding-right: 64px;
+    box-sizing: border-box;
+  }
 
-  @media all and (max-width: 1024px) {
-    display: none;
+  @media all and (min-width: 280px) and (max-width: 1024px) {
+    padding-left: 12px;
+    padding-right: 12px;
+    box-sizing: border-box;
   }
 `;
 
 const MobileButton = styled.div<{
   menu: boolean;
 }>`
-  display: none;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   align-items: center;
   justify-content: center;
   user-select: none;
   cursor: pointer;
-
-  border-bottom: ${(props) => (props.menu ? `3px solid ${props.theme.colors.selected}` : "none")};
+  display: inline-flex;
+  align-items: center;
 
   .img-btn{
     width: 40px;
@@ -178,19 +184,11 @@ const MobileButton = styled.div<{
 
   @media all and (min-width: 280px) and (max-width: 512px){
     width: 50px;
-    height: 50px;
-
-    .img-btn{
-      width: 40px;
-      height: 40px;
-    }
   }
 }
 `;
 
 const HeaderToggleButton = styled.div`
-  position: absolute;
-  right: 12px;
   display: inline-flex;
   gap: 8px;
   align-items: center;

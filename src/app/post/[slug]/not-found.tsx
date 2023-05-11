@@ -21,7 +21,6 @@ const NotFoundWrap = styled.div`
   flex-direction: column;
   gap: 100px;
   align-items: center;
-  background: yellow;
   ${({ theme }) => css`
     background: ${theme.colors.postBackground};
     color: ${theme.colors.text} !important;

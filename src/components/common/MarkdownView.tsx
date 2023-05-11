@@ -16,7 +16,7 @@ function MarkdownView({ post }: MarkdownViewProps) {
   const { mode = "light" } = option;
 
   return (
-    <div className={`markdown-body markdown-body-${mode}`}>
+    <div className={`markdown-body`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{

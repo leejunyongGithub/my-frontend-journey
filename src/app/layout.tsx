@@ -1,7 +1,7 @@
 import "./globals.css";
 import RootStyleRegistry from "../lib/RootStyleRegistry";
 import Main from "@/components/common/Main";
-import { getPostData } from "@/lib/posts";
+import { getDirectoryList, getPostData } from "@/lib/posts";
 import { notFound } from "next/navigation";
 
 export const metadata = {
@@ -13,8 +13,11 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const postData = getPostData();
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const postData = await getPostData();
+  const directoryList = await getDirectoryList();
+
+  console.log(directoryList)
 
   if (!children) {
     notFound();
@@ -24,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <RootStyleRegistry>
-          <Main posts={postData}>{children}</Main>
+          <Main posts={postData} directoryList={directoryList}>{children}</Main>
         </RootStyleRegistry>
       </body>
     </html>

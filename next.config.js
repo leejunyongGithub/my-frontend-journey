@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+const path = require('path');
+
 const nextConfig = {
   experimental: {
     appDir: true,
@@ -11,13 +14,16 @@ const nextConfig = {
     domains: ["webtlify.kr"],
     formats: ["image/avif", "image/webp"],
   },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
   async rewrites() {
     return [
       {
-        source: '/posts/:slug',
-        destination: '/post/:slug',
+        source: "/posts/:slug",
+        destination: "/post/:slug",
       },
-    ]
+    ];
   },
 };
 

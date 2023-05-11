@@ -155,7 +155,7 @@ const PostFilter = styled.div`
   display: inline-flex;
   display: inline-flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 4px;
 `;
 
 const FilterBedge = styled.div<{
@@ -171,16 +171,17 @@ const FilterBedge = styled.div<{
   align-items: center;
   border-radius: 1rem;
 
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   user-select: none;
   cursor: pointer;
 
   ${({ theme }) => css`
     background: ${theme.colors.bedge};
-    color: ${theme.colors.bedgeColor};
-    font-weight: 700;
-
+    color: #000;
+    
     &.selected {
-      color: ${theme.colors.selectedBedge};
+      color: #fff;
+      background: ${theme.colors.selectedBedge};
     }
   `};
 `;

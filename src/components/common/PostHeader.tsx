@@ -3,20 +3,25 @@ import moment from "moment";
 import styled, { css } from "styled-components";
 import Flex from "./Flex";
 import { NextSeo } from "next-seo";
+import { FcBookmark } from "react-icons/fc";
+import Image from "next/image";
 
 interface Props {
   data: any;
 }
 
 function PostHeader({ data }: Props) {
-  const { title, tags, date, author } = data;
+  const { title, tags, date, author, thumbnail } = data;
   const parseDate = moment(date).format("YYYY년 MM월 DD일");
 
   return (
     <>
       <NextSeo title="Home Page Title" description="Home page description of the page" />
       <PostHeaderWrap>
-        <HeaderTitle>{title}</HeaderTitle>
+        <HeaderTitle>
+          <FcBookmark />
+          {title}
+        </HeaderTitle>
         <HeaderItem>
           <div style={{ display: "inline-flex" }}>
             {tags.map((item: any, index: number) => (
@@ -46,6 +51,9 @@ const HeaderTitle = styled.div`
   height: 100%;
   font-size: 3rem;
   font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  line-height: 15px;
 `;
 
 const HeaderItem = styled.div`

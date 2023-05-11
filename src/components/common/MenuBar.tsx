@@ -101,7 +101,6 @@ const StyledMenuBar = styled.aside<{
   background: #fbfbfa;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.024) -1px 0px 0px 0px inset;
-  overflow: ${(props) => (props.expanded ? "" : "hidden")};
   transition: width 0.5s;
   ${({ theme }) => css`
     background: ${theme.colors.background};
@@ -115,6 +114,8 @@ const StyledMenuBar = styled.aside<{
   @media all and (max-width: 1024px) {
     display: none;
   }
+
+  overflow: hidden;
 `;
 
 const BarHeader = styled.div<{

@@ -1,20 +1,34 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import styled, { css } from "styled-components";
+import { usePathname } from "next/navigation";
+import { Transition, TransitionGroup } from "react-transition-group";
 
 function Content({ children }: { children: ReactNode }) {
-  return <StyledContent className="content-wrap">{children}</StyledContent>;
+  const pathname = usePathname();
+
+  return (
+    <TransitionGroup component={null}>
+      <Transition key={pathname} timeout={{ enter: 500, exit: 500 }}>
+        {(status) => (
+          <StyledContent id="main-content" className={`content-wrap page ${status}`}>
+            {children}
+          </StyledContent>
+        )}
+      </Transition>
+    </TransitionGroup>
+  );
 }
 
 export default Content;
 
 const StyledContent = styled.div`
   width: 100%;
-  height: calc(100vh - 50px);
-  overflow-y: scroll;
-  overflow-x: hidden;
   position: relative;
+  background: #fff;
 
-  padding-top: 50px;
+  margin-top: 50px;
+
+  padding-top: 100px;
   padding-bottom: 50px;
   padding-left: 15rem;
   padding-right: 15rem;
@@ -22,30 +36,6 @@ const StyledContent = styled.div`
   display: inline-flex;
   justify-content: flex-start;
   flex-direction: column;
-
-  ${({ theme }) => css`
-    background: ${theme.colors.content};
-    transition: all 0.3s ease-in-out;
-  `};
-
-  &.content-wrap::-webkit-scrollbar {
-    width: 10px; /* 스크롤바의 너비 */
-  }
-
-  &.content-wrap::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    ${({ theme }) => css`
-      background: ${theme.colors.scroll};
-    `};
-  }
-
-  .markdown-body-content {
-    ${({ theme }) => css`
-      background: ${theme.colors.content};
-      color: ${theme.colors.text};
-      transition: all 0.3s ease-in-out;
-    `};
-  }
 
   @media all and (max-width: 1024px) {
     position: absolute;
@@ -65,9 +55,5 @@ const StyledContent = styled.div`
     padding-right: 12px;
     padding-top: 12px;
     box-sizing: border-box;
-  }
-
-  &.content-wrap::-webkit-scrollbar-track {
-    background: rgba(33, 122, 244, 0.1); /*스크롤바 뒷 배경 색상*/
   }
 `;

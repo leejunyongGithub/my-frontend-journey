@@ -11,7 +11,7 @@ import SearchInput from "./Input/SearchInput";
 
 function PostList(props: any) {
   const [search, change] = useState<string>("");
-  const { posts } = props;
+  const { posts, directoryList } = props;
   const option = useRecoilValue(recoilStateOption);
   const { subExpanded, mode } = option;
 
@@ -30,8 +30,8 @@ function PostList(props: any) {
       return title.toLowerCase().includes(search.toLowerCase());
     }) || [];
 
-  const categoryList = filterCategoryList(posts);
-  const filterData = filterPostList(filterList);
+  //const categoryList = filterCategoryList(posts);
+  //const filterData = filterPostList(filterList);
 
   return (
     <PostListWrap expanded={subExpanded}>
@@ -40,18 +40,21 @@ function PostList(props: any) {
           글 <span style={{ color: "#978c8c !important" }}>{`(${posts?.length || 0})`}</span>
         </div>
         <SearchInput value={search} onChange={handleChangeValue} clear={clearValue} placeholder="검색.." />
-        {categoryList?.map((item: any) => (
-          <MenuSelectList
-            className="no-scrollbar"
-            key={item.frontMatter.category}
-            trigger={
-              <MenuButton icon={<SlArrowRight size={16} />} color={mode === "dark" ? "#fff" : "#5c6975"}>
-                <span>{item.frontMatter.category}</span>
-              </MenuButton>
-            }
-            options={filterData?.[item.frontMatter.category] || []}
-          />
-        ))}
+        {Object.keys(directoryList).map((item: any) => {
+          const category = directoryList?.[item] || "";
+          return (
+            <MenuSelectList
+              className="no-scrollbar"
+              key={item}
+              trigger={
+                <MenuButton icon={<SlArrowRight size={16} />} color={mode === "dark" ? "#fff" : "#5c6975"}>
+                  <span>{item}</span>
+                </MenuButton>
+              }
+              options={category || []}
+            />
+          );
+        })}
       </ListContent>
     </PostListWrap>
   );
@@ -82,7 +85,7 @@ const PostListWrap = styled.div<{
     color: ${theme.colors.color};
     border-right: 1px solid ${theme.colors.borderBottom};
   `};
-  
+
   transition: all 0.3s ease-in-out;
 `;
 

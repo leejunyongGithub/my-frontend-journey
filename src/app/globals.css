@@ -84,17 +84,45 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  overflow-y: hidden;
+}
+
+.page {
+  top: 0;
+  transition: opacity 1s;
+}
+.page.entering,
+.page.entered {
+  position: relative;
+  opacity: 1;
+}
+.page.exiting,
+.page.exited {
+  position: absolute;
+  opacity: 0;
+}
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+.scroll-progress {
+  width: 100%;
+  height: 4px;
+  background-color: rgb(208, 208, 208);
+  bottom: 0px;
+  left: 0px;
+  /* 가장 상단에 고정 배치 */
+  position: absolute;
+
+}
+
+.scroll-progress-gauage {
+  height: 100%;
+  background-color: rgb(187, 245, 160);
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
 
 a {
@@ -1207,4 +1235,21 @@ filter: invert(50%);
   width: 100%;
   display: inline-flex;
   flex-direction: column;
+}
+
+@keyframes fadein {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+@-moz-keyframes fadein { /* Firefox */
+  from {opacity:0;}
+  to {opacity:1;}
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+  from {opacity:0;}
+  to {opacity:1;}
+}
+@-o-keyframes fadein { /* Opera */
+  from {opacity:0;}
+  to {opacity: 1;}
 }

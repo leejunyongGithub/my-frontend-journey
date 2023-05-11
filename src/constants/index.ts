@@ -18,9 +18,9 @@ export const light = {
     listHoverText: "#8899a8",
     listText: "#8899a8",
     listItem: "#ededed",
-    bedge: "#000",
+    selectedBedge: "#58acfa",
     bedgeColor: "#fff",
-    selectedBedge: "#f53e8c"
+    bedge: "#fff"
   },
 };
 
@@ -44,6 +44,6 @@ export const dark = {
     listItem: "#4b4b4b",
     bedge: "#fff",
     bedgeColor: "#000",
-    selectedBedge: "#55a4f3"
+    selectedBedge: "#f35579"
   },
 };

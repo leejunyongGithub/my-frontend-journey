@@ -7,6 +7,7 @@ import DropdownWrapper from "./Dropdown";
 import { usePathname } from "next/navigation";
 
 function MenuSelectList({ trigger, options }: any) {
+  console.log(options, "options");
   const pathname = decodeURI(decodeURIComponent(usePathname()).replace("-", " "));
   const isCheck = pathname?.substring(6) ? pathname.substring(6) : "";
   const [selected, change] = useState(isCheck);
@@ -23,7 +24,12 @@ function MenuSelectList({ trigger, options }: any) {
         <StyledTrigger trigger={trigger} />
         <StyledMenu>
           {options?.map((option: any, index: string | number) => (
-            <div key={option.slug} onClick={() => router.push(`/post/${option.slug}`)}>
+            <div
+              key={option.slug}
+              onClick={() =>
+                router.push(`/post/${option.slug}`)
+              }
+            >
               <StyledItem
                 key={`${option.slug}-${index}`}
                 value={option.frontMatter.title}
