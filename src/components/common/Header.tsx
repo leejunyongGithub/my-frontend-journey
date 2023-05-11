@@ -119,7 +119,7 @@ const StyledHeader = styled.header<{
   width: ${(props) => (props.scroll > 1 ? "80%" : "100%")};
   border-radius: ${(props) => (props.scroll > 1 ? "2rem" : "0")};
   text-align: center;
-  height: 50px;
+  height: 60px;
   position: fixed;
   margin: 0 auto;
   left: 0;
@@ -138,18 +138,19 @@ const StyledHeader = styled.header<{
   padding-right: ${(props) => (props.scroll > 1 ? "25px" : "15rem")};
 
   @media all and (min-width: 280px) and (max-width: 1024px) {
-    transition: all 0.3s ease-in-out;
     border-bottom: ${(props) => (props.scroll > 1 ? "none" : "1px solid #ededed")};
     width: ${(props) => (props.scroll > 1 ? "90%" : "100%")};
   }
 
   @media all and (min-width: 1024px) and (max-width: 1200px) {
+    height: 50px;
     padding-left: 64px;
     padding-right: 64px;
     box-sizing: border-box;
   }
 
   @media all and (min-width: 280px) and (max-width: 1024px) {
+    height: 50px;
     padding-left: 12px;
     padding-right: 12px;
     box-sizing: border-box;
