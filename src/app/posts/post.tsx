@@ -1,10 +1,9 @@
 "use client";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import SearchInput from "@/components/common/Input/SearchInput";
 import styled, { css } from "styled-components";
-import { filterDate } from "@/utils";
 import moment from "moment";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 function Post(props: any) {
   const { posts } = props;
@@ -22,11 +21,11 @@ function Post(props: any) {
                 {posts?.[title].map((item: any) => (
                   <PostCard
                     key={item.slug}
-                    onClick={() =>
-                      router.push(`/posts/${item.frontMatter.category}/${item.slug}`)
-                    }
+                    onClick={() => router.push(`/posts/${item.frontMatter.category}/${item.slug}`)}
                   >
-                    <CardThumbnail />
+                    <CardThumbnail>
+                      <Image src={`/${item.frontMatter?.thumbnail}` || ""} alt={item.slug} width={500} height={500} />
+                    </CardThumbnail>
                     <CardKeyword>
                       <PostFilter>
                         {item?.frontMatter?.tags?.length > 0 &&
@@ -37,7 +36,7 @@ function Post(props: any) {
                     </CardKeyword>
                     <CardTitle>{item?.frontMatter.title || ""}</CardTitle>
                     <CardDescription>
-                      <span>설명란 입니다asdasdasdasdasdasdasdasdasd.</span>
+                      <span>{item?.frontMatter?.description || "설명이 없습니다."}</span>
                     </CardDescription>
                     <CardDate>{moment(item?.frontMatter.date || "").format("YYYY년 MM월 DD일")}</CardDate>
                     <CardWriter>
@@ -158,6 +157,19 @@ const CardThumbnail = styled.div`
   width: 100%;
   height: 200px;
   background: gray;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const CardDescription = styled.div`

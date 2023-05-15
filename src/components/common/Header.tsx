@@ -72,9 +72,10 @@ function Header() {
     };
   }, [handleScroll]);
 
+  const check = global ? global : window;
 
   return (
-    <StyledHeader scroll={global?.scrollY || 0}>
+    <StyledHeader scroll={check?.scrollY || 0}>
       <div style={{ display: "inline-flex", height: "100%" }}>
         <Link href="/">
           <MobileButton menu={selected === "logo"} onClick={() => handleChangeSide("logo")}>
@@ -104,7 +105,7 @@ function Header() {
         <ToggleButton width={40} height={20} toggle={mode === "light" ? false : true} onClick={handleChangeToggle} />
         <HiOutlineMoon size={20} />
       </HeaderToggleButton>
-      {global?.scrollY > 1 && pathname.includes("post/") && (
+      {check?.scrollY > 1 && pathname.includes("posts") && (
         <div className="scroll-progress" ref={progressRef}>
           <div className="scroll-progress-gauage" style={{ width: width + "%" }}></div>
         </div>

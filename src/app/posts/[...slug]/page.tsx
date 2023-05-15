@@ -10,8 +10,8 @@ export async function generateMetadata({ params }: any) {
   const { description }: any = props;
 
   return {
-    title: description?.["title"] || "",
-    description: "",
+    title: description?.["title"] || "준키위키 블로그",
+    description: description?.["description"] || "내용이 없습니다.",
     authors: [
       {
         name: description?.["author"] || "",
@@ -21,7 +21,9 @@ export async function generateMetadata({ params }: any) {
     openGraph: {
       title: description?.["title"],
       description: "여기를 열어보세요.",
+      images: [description?.["thumbnail"] || ""]
     },
+    
   };
 }
 

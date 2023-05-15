@@ -10,7 +10,7 @@ author: Jun's
 ---
 
 # My React Component
-![이미지1](./thumbnail.png)
+![이미지1](./assets/thumbnail.png)
 
 This is a simple React component that renders a heading and a paragraph of text.
 

@@ -7,6 +7,7 @@ date: 2018-01-05 18:02:10
 draft: false
 info: false
 author: Jun's
+thumbnail: post/retrospect/2023/thumbnail.png
 ---
 # My Markdown Document
 
