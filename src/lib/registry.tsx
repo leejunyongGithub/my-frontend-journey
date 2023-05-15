@@ -17,3 +17,4 @@ export default function StyledComponentsRegistry({ children }: { children: React
 
   return <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>{children}</StyleSheetManager>;
 }
+

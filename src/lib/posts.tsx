@@ -2,6 +2,7 @@ import matter from "gray-matter";
 import fs from "fs";
 import path from "path";
 import moment from "moment";
+import { serialize } from 'next-mdx-remote/serialize'
 
 const postsDirectory = path.join(process.cwd(), "src/blogposts");
 const testPath = path.join(process.cwd(), "src/posts");

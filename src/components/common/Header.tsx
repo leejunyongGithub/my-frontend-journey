@@ -1,3 +1,4 @@
+"use client";
 import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
@@ -65,10 +66,10 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, true);
+    window?.addEventListener("scroll", handleScroll, true);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll, true);
+      window?.removeEventListener("scroll", handleScroll, true);
     };
   }, [handleScroll]);
 
@@ -89,18 +90,6 @@ function Header() {
         </Link>
       </div>
       <HeaderToggleButton>
-        {/* <div>
-          <a href="https://www.instagram.com/kiwipodo/" target="_blank">
-            <MobileButton menu={selected === "instagram"} onClick={() => handleChangeSide("instagram")}>
-              <SlSocialInstagram size={20} />
-            </MobileButton>
-          </a>
-          <a href="https://github.com/leejunyongGithub/" target="_blank">
-            <MobileButton menu={selected === "github"} onClick={() => handleChangeSide("github")}>
-              <VscGithubAlt size={20} />
-            </MobileButton>
-          </a>
-        </div> */}
         <HiOutlineSun size={20} />
         <ToggleButton width={40} height={20} toggle={mode === "light" ? false : true} onClick={handleChangeToggle} />
         <HiOutlineMoon size={20} />
@@ -116,7 +105,7 @@ function Header() {
 
 export default Header;
 
-const StyledHeader = styled.header<{
+const StyledHeader = styled.div<{
   scroll: number;
 }>`
   overflow: hidden;

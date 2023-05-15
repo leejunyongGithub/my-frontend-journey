@@ -1,7 +1,6 @@
 import "./globals.css";
-import RootStyleRegistry from "../lib/RootStyleRegistry";
+import RootStyleRegistry from "../lib/registry";
 import Main from "@/components/common/Main";
-import { getDirectoryList } from "@/lib/posts";
 import { notFound } from "next/navigation";
 
 export const metadata = {
@@ -14,8 +13,6 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
- const directoryList = getDirectoryList();
-
   if (!children) {
     notFound();
   }

@@ -4,19 +4,60 @@ import styled, { css } from "styled-components";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { cloneDeep } from "lodash";
 
 function Post(props: any) {
   const { posts } = props;
   const router = useRouter();
-  const category = Object.keys(posts) || [];
+  const category = Object.keys(posts).filter((item: any) => posts[item].length > 0) || [];
+
+  const [filterList, change] = useState<string[]>(category);
+
+  const handleChangeBedge = useCallback(
+    (item: string, index: number) => {
+      let copyList = cloneDeep(filterList);
+      if (filterList.includes(item)) {
+        copyList[index] = "";
+      } else {
+        copyList[index] = item;
+      }
+
+      change(copyList);
+    },
+    [filterList]
+  );
+
+  if (!posts) {
+    return <></>;
+  }
 
   return (
     <PostWrap>
-      {category.map(
+      <PostDescription>
+        <h1>Blog</h1>
+        <p>프론트엔드 개발을 하면서 생각을 정리하고 기록하는 공간입니다 🧐</p>
+      </PostDescription>
+      <FilterCategory>
+        <CategoryList>
+          {category.map((bedge: string, index: number) => (
+            <Bedge
+              key={bedge}
+              onClick={() => handleChangeBedge(bedge, index)}
+              selected={filterList.includes(bedge) ? true : false}
+            >
+              {bedge}
+            </Bedge>
+          ))}
+        </CategoryList>
+      </FilterCategory>
+      {filterList.map(
         (title) =>
           posts?.[title]?.length > 0 && (
             <React.Fragment key={title}>
-              <PostTitle>{title}</PostTitle>
+              <PostTitle>
+                {title}
+                <span style={{ fontSize: "1.5rem" }}>{`(${posts?.[title]?.length || 0})`}</span>
+              </PostTitle>
               <GridWrap>
                 {posts?.[title].map((item: any) => (
                   <PostCard
@@ -24,7 +65,12 @@ function Post(props: any) {
                     onClick={() => router.push(`/posts/${item.frontMatter.category}/${item.slug}`)}
                   >
                     <CardThumbnail>
-                      <Image src={`/${item.frontMatter?.thumbnail}` || ""} alt={item.slug} width={500} height={500} />
+                      <Image
+                        src={item?.frontMatter?.thumbnail ? `/${item?.frontMatter?.thumbnail}` : "/none.png"}
+                        alt={item?.slug}
+                        width={300}
+                        height={300}
+                      />
                     </CardThumbnail>
                     <CardKeyword>
                       <PostFilter>
@@ -34,12 +80,13 @@ function Post(props: any) {
                           ))}
                       </PostFilter>
                     </CardKeyword>
-                    <CardTitle>{item?.frontMatter.title || ""}</CardTitle>
+                    <CardTitle>{item?.frontMatter?.title || ""}</CardTitle>
                     <CardDescription>
                       <span>{item?.frontMatter?.description || "설명이 없습니다."}</span>
                     </CardDescription>
                     <CardDate>{moment(item?.frontMatter.date || "").format("YYYY년 MM월 DD일")}</CardDate>
                     <CardWriter>
+                      <CircleBedge />
                       <span>{item?.frontMatter.author || ""}</span>
                     </CardWriter>
                   </PostCard>
@@ -75,12 +122,61 @@ const PostWrap = styled.div`
   }
 `;
 
+const PostDescription = styled.div`
+  width: 100%;
+
+  h1 {
+    font-weight: 700;
+    font-size: 3rem;
+  }
+`;
+
+const FilterCategory = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const CategoryList = styled.div`
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+`;
+
+const CircleBedge = styled.div`
+  width: 40px;
+  height: 40px;
+  background-image: url("/logo.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid #ededed;
+  border-radius: 50%;
+`;
+
+const Bedge = styled.div<{
+  selected: boolean;
+}>`
+  height: 30px;
+  border-radius: 1rem;
+  background: ${(props) => (props.selected ? "#007bff" : "#6c757d")};
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease-out;
+  &: hover {
+    transform: translateY(-5px) translateZ(0);
+  }
+`;
+
 const GridWrap = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-
   column-gap: 20px;
   row-gap: 20px;
   padding: 16px;
@@ -120,15 +216,6 @@ const FilterBedge = styled.div<{
   user-select: none;
   cursor: pointer;
 
-  ${({ theme }) => css`
-    background: ${theme.colors.bedge};
-    color: #000;
-
-    &.selected {
-      color: #fff;
-      background: ${theme.colors.selectedBedge};
-    }
-  `};
 `;
 
 const PostCard = styled.div`
@@ -141,8 +228,10 @@ const PostCard = styled.div`
   overflow: hidden;
   transition: all 0.3s ease-out;
   &: hover {
-    transform: translateY(-5px) scale(1.005) translateZ(0);
+    transform: translateY(-5px) translateZ(0);
   }
+
+  cursor: pointer;
 `;
 
 const CardTitle = styled.div`
@@ -203,6 +292,10 @@ const CardWriter = styled.div`
   border-top: 1px solid #ededed;
   padding: 16px;
   box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: #333;
 `;
 
 const SkeletonCard = styled.div``;

@@ -1,10 +1,7 @@
 "use client";
 import moment from "moment";
 import styled, { css } from "styled-components";
-import Flex from "./Flex";
-import { NextSeo } from "next-seo";
 import { FcBookmark } from "react-icons/fc";
-import Image from "next/image";
 
 interface Props {
   data: any;
@@ -16,7 +13,6 @@ function PostHeader({ data }: Props) {
 
   return (
     <>
-      <NextSeo title="Home Page Title" description="Home page description of the page" />
       <PostHeaderWrap>
         <HeaderTitle>
           <FcBookmark />
@@ -69,8 +65,4 @@ const Tag = styled.div`
   border-radius: 1rem;
   text-align: center;
   font-weight: 400;
-  ${({ theme }) => css`
-    background: ${theme.colors.bedge};
-    color: ${theme.colors.bedgeColor} !important;
-  `};
 `;

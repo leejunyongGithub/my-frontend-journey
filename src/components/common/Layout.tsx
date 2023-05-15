@@ -2,20 +2,17 @@
 import styled from "styled-components";
 import Content from "./Content";
 import Footer from "./Footer";
-import ThemeLayout from "./\bThemeLayout";
 import Header from "./Header";
 
 function Layout(props: any) {
-  const { children, posts, directoryList } = props;
+  const { children } = props;
 
   return (
-    <ThemeLayout>
-      <StyledLayout id="content-body">
-        <Header />
-        <Content>{children}</Content>
-        <Footer />
-      </StyledLayout>
-    </ThemeLayout>
+    <StyledLayout id="content-body">
+      <Header />
+      <Content>{children}</Content>
+      <Footer />
+    </StyledLayout>
   );
 }
 

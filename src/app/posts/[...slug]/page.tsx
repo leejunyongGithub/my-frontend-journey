@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: any) {
     keywords: description?.["tags"] || [],
     openGraph: {
       title: description?.["title"],
-      description: "여기를 열어보세요.",
+      description: description?.["description"] || "설명이 없습니다 😅",
       images: [description?.["thumbnail"] || ""]
     },
     

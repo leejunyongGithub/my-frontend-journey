@@ -21,10 +21,6 @@ const NotFoundWrap = styled.div`
   flex-direction: column;
   gap: 100px;
   align-items: center;
-  ${({ theme }) => css`
-    background: ${theme.colors.postBackground};
-    color: ${theme.colors.text} !important;
-  `};
   font-size: 3.25rem;
   user-select: none;
 
