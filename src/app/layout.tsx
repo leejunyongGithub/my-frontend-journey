@@ -1,7 +1,7 @@
 import "./globals.css";
 import RootStyleRegistry from "../lib/registry";
-import Main from "@/components/common/Main";
 import { notFound } from "next/navigation";
+import Layout from "@/components/layouts/Layout";
 
 export const metadata = {
   title: "준키위키 블로그",
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <RootStyleRegistry>
-          <Main>{children}</Main>
+          <Layout>{children}</Layout>
         </RootStyleRegistry>
       </body>
     </html>

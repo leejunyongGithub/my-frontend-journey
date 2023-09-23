@@ -2,12 +2,14 @@ import { notFound } from "next/navigation";
 import { fetchData } from "@/lib/posts";
 import Comment from "@/components/common/Comment";
 import MarkdownView from "@/components/common/MarkdownView";
-import PostHeader from "@/components/common/PostHeader";
+import PostHeader from "@/components/post/PostHeader";
 
 export async function generateMetadata({ params }: any) {
   const data = await fetchData(params);
   const { props } = data;
   const { description }: any = props;
+
+  console.log("render page")
 
   return {
     title: description?.["title"] || "준키위키 블로그",
@@ -21,9 +23,8 @@ export async function generateMetadata({ params }: any) {
     openGraph: {
       title: description?.["title"],
       description: description?.["description"] || "설명이 없습니다 😅",
-      images: [description?.["thumbnail"] || ""]
+      images: [description?.["thumbnail"] || ""],
     },
-    
   };
 }
 

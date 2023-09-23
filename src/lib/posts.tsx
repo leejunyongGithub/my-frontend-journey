@@ -2,36 +2,14 @@ import matter from "gray-matter";
 import fs from "fs";
 import path from "path";
 import moment from "moment";
-import { serialize } from 'next-mdx-remote/serialize'
 
-const postsDirectory = path.join(process.cwd(), "src/blogposts");
-const testPath = path.join(process.cwd(), "src/posts");
-
-export async function getPostData() {
-  const files = fs.readdirSync(postsDirectory);
-
-  const posts = files.map((filename) => {
-    const markdownWithMeta = fs.readFileSync(path.join(postsDirectory, filename), "utf-8");
-
-    const { data: frontMatter } = matter(markdownWithMeta);
-    const parseFrontMatter = {
-      ...frontMatter,
-      date: moment(frontMatter.date).format("YYYY-MM-DD HH:mm:ss"),
-    };
-
-    return {
-      frontMatter: parseFrontMatter,
-      slug: filename.split(".")[0],
-    };
-  });
-
-  return posts;
-}
+const postPath = path.join(process.cwd(), "src/posts");
 
 export async function getDirectoryList() {
-  const directory = fs.readdirSync(testPath);
+  const directory = fs.readdirSync(postPath);
   let sub: any = {};
   directory.forEach((title: string) => {
+    if (title === "about.md") return;
     sub[title] = getDiretory(title);
   });
 
@@ -41,7 +19,7 @@ export async function getDirectoryList() {
 export function getDiretory(path: string) {
   const diretoryPath = path;
 
-  const files = fs.readdirSync(`${testPath}/${diretoryPath}`);
+  const files = fs.readdirSync(`${postPath}/${diretoryPath}`);
 
   const list = files.map((fileName: string) => {
     return getFileInfo(fileName, diretoryPath);
@@ -53,7 +31,7 @@ export function getDiretory(path: string) {
 export function getFileInfo(fileName: string, path: string) {
   const diretoryPath = path || "";
   const diFileName = fileName || "";
-  const filePath = `${testPath}/${diretoryPath}/${diFileName}/index.md`;
+  const filePath = `${postPath}/${diretoryPath}/${diFileName}/index.md`;
   const markdownWithMeta = fs.readFileSync(filePath, "utf-8");
   const { data: frontMatter } = matter(markdownWithMeta);
   const parseFrontMatter = {
@@ -71,13 +49,13 @@ export function getFileInfo(fileName: string, path: string) {
 
 export async function fetchData(params: any) {
   try {
-    let parsePath = '';
-    params.slug.forEach((item:string) => {
-      parsePath += `${item}/`
-    })
+    let parsePath = "";
+    params.slug.forEach((item: string) => {
+      parsePath += `${item}/`;
+    });
 
     let decodeName = decodeURI(decodeURIComponent(parsePath));
-    const filePath = path.join(`${testPath}/${decodeName}`, `index.md`);
+    const filePath = path.join(`${postPath}/${decodeName}`, `index.md`);
     const post = matter(fs.readFileSync(filePath).toString());
 
     const { data, content } = post;
@@ -97,13 +75,4 @@ export async function fetchData(params: any) {
       notFound: true,
     };
   }
-}
-
-export function fetchAbout() {
-  const aboutPath = path.join(process.cwd(), "public/");
-  const filePath = path.join(aboutPath, `about.md`);
-  const post = matter(fs.readFileSync(filePath).toString());
-  const { content } = post;
-
-  return content;
 }

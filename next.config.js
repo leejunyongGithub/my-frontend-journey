@@ -1,10 +1,8 @@
 /** @type {import('next').NextConfig} */
-
-const path = require('path');
-
 const nextConfig = {
   experimental: {
     appDir: true,
+    mdxRs: true,
   },
   compiler: {
     styledComponents: true,
@@ -14,17 +12,14 @@ const nextConfig = {
     domains: ["webtlify.kr"],
     formats: ["image/avif", "image/webp"],
   },
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/posts/:slug",
-        destination: "/post/:slug",
-      },
-    ];
-  },
 };
 
-module.exports = nextConfig;
+const withMDX = require("@next/mdx")({
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+    providerImportSource: "@mdx-js/react",
+    // If you use `MDXProvider`, uncomment the following line.
+  },
+});
+module.exports = withMDX(nextConfig);

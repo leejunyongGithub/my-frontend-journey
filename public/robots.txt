@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://webtlify.kr
+
+# Sitemaps
+Sitemap: https://webtlify.kr/sitemap.xml

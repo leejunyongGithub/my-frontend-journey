@@ -1,7 +1,12 @@
-import { fetchAbout } from "@/lib/posts";
-import MarkdownView from "@/components/common/MarkdownView";
+import { getAbout } from "@/lib";
+//import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
-export default function Home() {
-  const about = fetchAbout();
-  return <MarkdownView post={about} />;
+export default async function Home() {
+  const { mdxSource }: { mdxSource: any } = await getAbout();
+  return (
+    <MDXRemote
+      {...mdxSource}
+    />
+  );
 }

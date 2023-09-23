@@ -12,6 +12,8 @@ function MarkdownView({ post }: MarkdownViewProps) {
   return (
     <div className={`markdown-body`}>
       <ReactMarkdown
+        // eslint-disable-next-line react/no-children-prop
+        children={post}
         components={{
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || "");
@@ -26,9 +28,7 @@ function MarkdownView({ post }: MarkdownViewProps) {
             );
           },
         }}
-      >
-        {post}
-      </ReactMarkdown>
+      />
     </div>
   );
 }

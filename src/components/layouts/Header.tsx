@@ -3,7 +3,7 @@ import { recoilStateOption } from "@/recoilState/recoilStateOption";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
-import ToggleButton from "./Button/ToggleButton";
+import ToggleButton from "../common/Button/ToggleButton";
 import { LAYOUT_KEY } from "@/constants";
 import { setItem } from "@/utils";
 import Link from "next/link";

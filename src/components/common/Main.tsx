@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import Layout from "./Layout";
+import Layout from "../layouts/Layout";
 import { RecoilRoot } from "recoil";
 
 function Main(props: any) {
